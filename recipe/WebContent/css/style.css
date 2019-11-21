@@ -1,0 +1,128 @@
+@charset "UTF-8";
+
+<style>
+#container {
+	width: 1000px;
+	margin: 0px auto;
+	padding: 20px;
+}
+section {
+	width: 1000px;
+	height: auto;
+	padding: 20px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	border: 1px solid #bcbcbc;
+	text-align: center;
+}
+#recipeSection {
+	overflow: scroll;
+	overflow-x: hidden;
+	width: 800px;
+	height: 1000px;
+	padding: 20px;
+	margin: 0 auto;
+	margin-bottom: 5px;
+	border: 1px solid #bcbcbc;
+	text-align: center;
+}
+#recipeContent {
+	vertical-align : middle;
+	width: 700px;
+	height: auto;
+	padding: 20px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	border: 0px solid;
+	text-align : left;
+	cursor : pointer;
+}
+#category {
+	width: 900px;
+	height: auto;
+	padding: 20px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+	border: 1px solid #bcbcbc;
+}
+#list {
+	width: 700px;
+	height: 150px;
+	padding: 20px;
+	margin-bottom: 20px;
+	border: 1px solid #ffffff;
+}
+#footer {
+	width: 1000px;
+	clear: both;
+	padding: 10px;
+	margin: 0 auto;
+	border: 1px solid #bcbcbc;
+}
+ul.h {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: AliceBlue;
+}
+li.h {
+	float: left;
+	solid: #bbb;
+}
+li.l {
+	float: right;
+	solid: #bbb;
+}
+li.h a.h {
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+li.h a.h:hover:not(.active) {
+	background-color: Gold;
+}
+li.l a.h {
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+li.l a.h:hover:not(.active) {
+	background-color: Gold;
+}
+.active { background-color: Fuchsia; }
+a {text-decoration: none; }
+a.slink:link { color: black; }
+a.slink:visited { color: blue; }
+a.slink:active { color: yellow; }
+a.slink:hover { color: red; }
+ul.c {
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+li.c {
+	float: left;
+	solid: #bbb;
+}
+#menubar li.l ul.h {
+	background: Fuchsia;
+	display:none;
+	height:auto;
+	position:absolute;
+	right : 7px;
+	width:auto;
+	z-index:200;
+	color: black;
+	text-align: center;
+	text-decoration: none;
+}
+#menubar li.l:hover ul.h {
+	display:block;
+}  
+</style>
