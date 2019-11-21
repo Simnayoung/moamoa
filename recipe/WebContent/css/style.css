@@ -12,7 +12,6 @@ section {
 	padding: 20px;
 	margin: 0 auto;
 	margin-bottom: 5px;
-	border: 1px solid #bcbcbc;
 	text-align: center;
 }
 #recipeSection {
@@ -62,44 +61,54 @@ section {
 ul.h {
 	list-style-type: none;
 	margin: 0;
-	padding: 0;
+	padding: 0px;
 	overflow: hidden;
-	background-color: AliceBlue;
+	background-color: white;
+	border-bottom : 1px solid lightgray;
+	font-weight : bold;
+	font-family : Sans-Serif;
 }
 li.h {
 	float: left;
-	solid: #bbb;
+	/*solid: #bbb;*/
 }
 li.l {
 	float: right;
-	solid: #bbb;
+	/*solid: #bbb;*/
+}
+li.h a.h, li.l a.h {
+	display: block;
+	color: black;
+	text-align: center;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+li.h a.h:hover:not(.active), li.l a.h:hover:not(.active) {
+	color: rgb(233,77,77);
 }
 li.h a.h {
+	border-bottom: 2px solid lightgray;
+}
+
+li.l a.ha {
 	display: block;
-	color: black;
+	color: white;
 	text-align: center;
-	padding: 14px 16px;
+	padding: 5px 16px;
 	text-decoration: none;
 }
+
 li.h a.h:hover:not(.active) {
-	background-color: Gold;
+	border-bottom: 2px solid rgb(233,77,77);
 }
-li.l a.h {
-	display: block;
-	color: black;
-	text-align: center;
-	padding: 14px 16px;
-	text-decoration: none;
+
+li.l a.ha:hover:not(.active) {
+	background-color : rgb(205,59,59);
 }
-li.l a.h:hover:not(.active) {
-	background-color: Gold;
-}
+
 .active { background-color: Fuchsia; }
 a {text-decoration: none; }
-a.slink:link { color: black; }
-a.slink:visited { color: blue; }
-a.slink:active { color: yellow; }
-a.slink:hover { color: red; }
+
 ul.c {
 	list-style-type: none;
 	margin: 0;
@@ -111,18 +120,22 @@ li.c {
 	solid: #bbb;
 }
 #menubar li.l ul.h {
-	background: Fuchsia;
 	display:none;
 	height:auto;
 	position:absolute;
-	right : 7px;
+	right : 15px;
+	top : 55px;
 	width:auto;
 	z-index:200;
-	color: black;
 	text-align: center;
 	text-decoration: none;
 }
+
 #menubar li.l:hover ul.h {
 	display:block;
+	border-radius : 10px;
+	background-color: rgb(233,77,77);
+	font-size : 8pt;
 }  
+
 </style>
