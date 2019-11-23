@@ -36,20 +36,21 @@
 	<div id="container">
 		<div id="navi">
 			<ul class="h">
-				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
+				<li class="h"><a class="h active" href="main.jsp"><!-- <img src="/recipe/cateImg/title.PNG">-->모아모아레시피</a></li>
  		<%
             if(userID == null) // 로그인이 되어 있지 않을 시에만 보여줌
             {
          %>
          <div id="menubar">
                <ul class="h">
-                  <li class="l"><a class="h" href="#">접속하기</a>
+                  <li class="l"><a class="h" href="#">로그인</a>
                      <ul class="h">
                         <form method="post" action="loginAction.jsp">
-                        	<font><center>로그인</center></font>
-                        	<input type="text" placeholder="아이디" name="userID" maxlength="20"><br>
-                        	<input type="password" placeholder="비밀번호" name="userPassword" maxlength="20"><br>
-                        	<input type="submit" value="로그인">
+                        	<div class = "p">
+		                       	<input type="text" placeholder="아이디" name="userID" maxlength="20" style = "width: 100px;"><br>
+		                       	<input type="password" placeholder="비밀번호" name="userPassword" maxlength="20" style = "width: 100px;"><br>
+		                       	<input type="submit" value="로그인">
+	                       	</div>
                         </form>        
                      </ul>
                    <li class="l"><a class="h" href="join.jsp">회원가입</a></li>
@@ -69,7 +70,7 @@
                   <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
                      	<li class="l"><a class="ha" href="logoutAction.jsp">로그아웃</a></li> 
-                        <li class="l"><a class="ha" href="rename.jsp">정보수정</a></li>                
+                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                
                      </ul>
                   </li>
                </ul></div>
@@ -78,8 +79,9 @@
          %>
 			</ul>
 		</div>
-	</div><br>
+	</div>
 	<section>
+	<br>
 		<div id="category">
 			<ul class="c">
 				<li class="c"><a href="submain.jsp?category=korean"><img src="/recipe/cateImg/korean.PNG"><br>한식</a></li>
@@ -93,7 +95,7 @@
 				<li class="c"><a href="submain.jsp?category=other"><img src="/recipe/cateImg/korean.PNG"><br>기타</a></li>
 			</ul>
 		</div>
-	</section><br>
+	</section>
 		<section><div id="recipeSection">
 			<% for(int i = 0; i<recipeList.length ; i++) {%>
 				<hr size="1" width="700"> 
@@ -113,9 +115,10 @@
 				</div>
 			<% } %>
 			<hr size="1" width="700"> 
-		</div></section>
+		</div>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
 	</div>
+	</section>
 </body>
 </html>

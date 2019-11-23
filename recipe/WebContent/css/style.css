@@ -7,56 +7,58 @@
 	padding: 20px;
 }
 section {
-	width: 1000px;
+	width: 100%;
 	height: auto;
-	padding: 20px;
-	margin: 0 auto;
-	margin-bottom: 5px;
+	margin: 0;
 	text-align: center;
+	background-color : #ffeaea;
 }
 #recipeSection {
-	overflow: scroll;
 	overflow-x: hidden;
-	width: 800px;
-	height: 1000px;
-	padding: 20px;
+	width: 700px;
+	height: auto;
+	padding: 10px;
 	margin: 0 auto;
 	margin-bottom: 5px;
+	border-radius : 5px;
 	border: 1px solid #bcbcbc;
 	text-align: center;
+	background-color : white;
 }
 #recipeContent {
 	vertical-align : middle;
 	width: 700px;
 	height: auto;
-	padding: 20px;
+	padding: 10px 0;
 	margin: 0 auto;
 	margin-bottom: 20px;
-	border: 0px solid;
 	text-align : left;
 	cursor : pointer;
 }
 #category {
-	width: 900px;
+	width: auto;
 	height: auto;
 	padding: 20px;
-	margin: 0 auto;
-	margin-bottom: 20px;
-	border: 1px solid #bcbcbc;
+	margin: 0;
+	background-color : white;
+	position : relative;
+	top : -10px;
 }
+
 #list {
-	width: 700px;
+	width: 800px;
 	height: 150px;
 	padding: 20px;
 	margin-bottom: 20px;
-	border: 1px solid #ffffff;
+	border: 1px solid #black;
 }
 #footer {
-	width: 1000px;
+	width: 99%;
 	clear: both;
 	padding: 10px;
 	margin: 0 auto;
-	border: 1px solid #bcbcbc;
+	border-top : 2px dotted #d3bebe;
+	background-color : white;
 }
 ul.h {
 	list-style-type: none;
@@ -64,7 +66,7 @@ ul.h {
 	padding: 0px;
 	overflow: hidden;
 	background-color: white;
-	border-bottom : 1px solid lightgray;
+	border-bottom : 1px solid #d3bebe;
 	font-weight : bold;
 	font-family : Sans-Serif;
 }
@@ -86,9 +88,7 @@ li.h a.h, li.l a.h {
 li.h a.h:hover:not(.active), li.l a.h:hover:not(.active) {
 	color: rgb(233,77,77);
 }
-li.h a.h {
-	border-bottom: 2px solid lightgray;
-}
+
 
 li.l a.ha {
 	display: block;
@@ -106,7 +106,10 @@ li.l a.ha:hover:not(.active) {
 	background-color : rgb(205,59,59);
 }
 
-.active { background-color: Fuchsia; }
+.active { 
+	background-color: white; 
+}
+
 a {text-decoration: none; }
 
 ul.c {
@@ -118,8 +121,9 @@ ul.c {
 li.c {
 	float: left;
 	solid: #bbb;
+	padding : 5px;
 }
-#menubar li.l ul.h {
+#menubar li.l ul.h{
 	display:none;
 	height:auto;
 	position:absolute;
@@ -131,11 +135,30 @@ li.c {
 	text-decoration: none;
 }
 
+
 #menubar li.l:hover ul.h {
 	display:block;
 	border-radius : 10px;
 	background-color: rgb(233,77,77);
-	font-size : 8pt;
+	font-size : 10pt;
 }  
+
+.p {
+	padding : 5px;
+}
+
+input[type=password] {
+    margin-top : 1px;
+}
+
+input[type=submit] {
+    margin-top : 5px;
+    background:white; 
+    border:0 none;
+    cursor:pointer;
+    -webkit-border-radius: 5px;
+    border-radius: 5px; 
+}
+
 
 </style>

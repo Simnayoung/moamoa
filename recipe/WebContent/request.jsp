@@ -39,17 +39,18 @@
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
-                     	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
-                        <li class="l"><a class="h" href="rename.jsp">회원정보수정</a></li>                  
+                     	<li class="l"><a class="ha" href="logoutAction.jsp">로그아웃</a></li> 
+                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                  
                      </ul>
                   </li>
                </ul></div>
 			</ul>
 		</div>
-	</div><br>
+	</div>
 	<section>
+	<br>
 		<h3>여러분의 소중한 레시피를 공유해주세요!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
 		<br><br>
@@ -118,9 +119,9 @@
 		</table></div>
 			<input type="submit" value="레시피요청"><br><br>
 		</form>
-	</section>
-	<div id="footer">
+		<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
 	</div>
+	</section>
 </body>
 </html>

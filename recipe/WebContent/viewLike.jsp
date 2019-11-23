@@ -48,17 +48,19 @@
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
-                     	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
-                        <li class="l"><a class="h" href="rename.jsp">회원정보수정</a></li>                  
+                     	<li class="l"><a class="ha" href="logoutAction.jsp">로그아웃</a></li> 
+                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                  
                      </ul>
                   </li>
                </ul></div>
 			</ul>
 		</div>
-	</div><br>
+	</div>
 		<section>
+		<br>
+		<div id="recipeSection">
 			<% for(int i = 0; i<searchList.length ; i++) {
 				String[] recipeInfo = recipeDAO.recipeInfo(searchList[i]);
 			%>
@@ -82,9 +84,10 @@
 			<hr size="1" width="700"> <h3>아직 발도장을 찍지 않으셨군요!<br><a href="main.jsp">발도장 찍으러 가기</a></h3>
 			<% } %>
 			<hr size="1" width="700"> 
-		</section>
+			</div>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
 	</div>
+	</section>
 </body>
 </html>

@@ -67,7 +67,7 @@
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
                      	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
                         <li class="l"><a class="h" href="rename.jsp">정보수정</a></li>                  
@@ -80,7 +80,7 @@
 			</ul>
 		</div>
 	</div><br>
-	<section>
+	<section id = "cate">
 		<div id="category">
 			<table><form method="post" action="listmain.jsp">
 				<tr>
