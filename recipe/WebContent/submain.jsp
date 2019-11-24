@@ -36,8 +36,10 @@
  %>
 	<div id="container">
 		<div id="navi">
+		<div id = "title">
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
+			</div>
 			<ul class="h">
-				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
  		<%
             if(userID == null) // 로그인이 되어 있지 않을 시에만 보여줌
             {
@@ -61,6 +63,7 @@
             else // 로그인 되어 있을 시에만 보여줌
             {
          %>
+         <font color = "white">타이틀자리타이틀자</font>
          <li class="h"><a class="h" href="viewLike.jsp">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>

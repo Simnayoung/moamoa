@@ -8,6 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/renacss.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
 </head>
 <body>
@@ -31,8 +32,12 @@
 %>
 	<div id="container">
 		<div id="navi">
+		<div id = "title">
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
+			</div>
 			<ul class="h">
-				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
+				
+				<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
@@ -51,6 +56,7 @@
 	</div>
 	<section>
 	<br>
+	<div id = "reque">
 		<h3>여러분의 소중한 레시피를 공유해주세요!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
 		<br><br>
@@ -119,6 +125,7 @@
 		</table></div>
 			<input type="submit" value="레시피요청"><br><br>
 		</form>
+		</div>
 		<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
 	</div>

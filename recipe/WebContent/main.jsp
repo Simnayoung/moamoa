@@ -35,8 +35,10 @@
    %>
 	<div id="container">
 		<div id="navi">
+			<div id = "title">
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
+			</div>
 			<ul class="h">
-				<li class="h"><a class="h active" href="main.jsp"><!-- <img src="/recipe/cateImg/title.PNG">-->모아모아레시피</a></li>
  		<%
             if(userID == null) // 로그인이 되어 있지 않을 시에만 보여줌
             {
@@ -61,6 +63,7 @@
             else // 로그인 되어 있을 시에만 보여줌
             {
          %>
+         <li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
@@ -84,19 +87,18 @@
 	<br>
 		<div id="category">
 			<ul class="c">
-				<li class="c"><a href="submain.jsp?category=korean"><img src="/recipe/cateImg/korean.PNG"><br>한식</a></li>
-				<li class="c"><a href="submain.jsp?category=chinese"><img src="/recipe/cateImg/japenese.PNG"><br>중식</a></li>
-				<li class="c"><a href="submain.jsp?category=japenese"><img src="/recipe/cateImg/western.PNG"><br>일식</a></li>
-				<li class="c"><a href="submain.jsp?category=western"><img src="/recipe/cateImg/korean.PNG"><br>양식</a></li>
-				<li class="c"><a href="submain.jsp?category=school"><img src="/recipe/cateImg/korean.PNG"><br>분식</a></li>
-				<li class="c"><a href="submain.jsp?category=fast"><img src="/recipe/cateImg/korean.PNG"><br>패스트푸드</a></li>
-				<li class="c"><a href="submain.jsp?category=dessert"><img src="/recipe/cateImg/korean.PNG"><br>디저트</a></li>
-				<li class="c"><a href="submain.jsp?category=easy"><img src="/recipe/cateImg/korean.PNG"><br>간편식</a></li>
-				<li class="c"><a href="submain.jsp?category=other"><img src="/recipe/cateImg/korean.PNG"><br>기타</a></li>
+				<li class="c"><a href="submain.jsp?category=korean"><img src="/recipe/cateImg/korean.jpg"><br>한식</a></li>
+				<li class="c"><a href="submain.jsp?category=chinese"><img src="/recipe/cateImg/chinese.jpg"><br>중식</a></li>
+				<li class="c"><a href="submain.jsp?category=japenese"><img src="/recipe/cateImg/japanese.jpg"><br>일식</a></li>
+				<li class="c"><a href="submain.jsp?category=western"><img src="/recipe/cateImg/western.jpg"><br>양식</a></li>
+				<li class="c"><a href="submain.jsp?category=school"><img src="/recipe/cateImg/tt.jpg"><br>분식</a></li>
+				<li class="c"><a href="submain.jsp?category=fast"><img src="/recipe/cateImg/fast.jpg"><br>패스트푸드</a></li>
+				<li class="c"><a href="submain.jsp?category=dessert"><img src="/recipe/cateImg/dessert.jpg"><br>디저트</a></li>
+				<li class="c"><a href="submain.jsp?category=easy"><img src="/recipe/cateImg/simple.jpg"><br>간편식</a></li>
+				<li class="c"><a href="submain.jsp?category=other"><img src="/recipe/cateImg/etc.png"><br>기타</a></li>
 			</ul>
 		</div>
-	</section>
-		<section><div id="recipeSection">
+		<div id="recipeSection">
 			<% for(int i = 0; i<recipeList.length ; i++) {%>
 				<hr size="1" width="700"> 
 				<div id="recipeContent" onclick="openInfoForm(<%=recipeList[i][0]%>);">
@@ -107,9 +109,9 @@
 					<% } %>
 					</th>
 					<td>
-					&nbsp;<b><%=recipeList[i][1]%></b><br>
-					&nbsp;재료 : <%=recipeList[i][4]%><br>
-					&nbsp;요리도구 : <%=recipeList[i][2]%><br>
+					&emsp;<b><%=recipeList[i][1]%></b><br><br>
+					&emsp;재료 : <%=recipeList[i][4]%><br>
+					&emsp;요리도구 : <%=recipeList[i][2]%><br>
 					</td>
 					</tr></table>
 				</div>

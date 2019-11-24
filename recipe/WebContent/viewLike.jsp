@@ -40,8 +40,11 @@
  %>
 	<div id="container">
 		<div id="navi">
+		<div id = "title">
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
+			</div>
 			<ul class="h">
-				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
+	<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
