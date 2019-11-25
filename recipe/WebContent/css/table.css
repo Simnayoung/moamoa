@@ -1,0 +1,15 @@
+@charset "UTF-8";
+
+table{
+	font-family : Sans-Serif;
+	font-size : 12pt;
+}
+
+tr, td, th{
+	padding : 5px 0;
+	line-height:200%;
+}
+
+#recipe_img{
+	padding : 20px 0;
+}

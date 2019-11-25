@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank","width=350, height=400, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank","width=410, height=400, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -84,14 +84,14 @@
             else // 로그인 되어 있을 시에만 보여줌
             {
          %>
-         <font color = "white">타이틀자리타이틀자</font>
+         <li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
                      	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
                         <li class="l"><a class="h" href="rename.jsp">정보수정</a></li>               
@@ -103,8 +103,8 @@
          %>
 			</ul>
 		</div>
-	</div><br>
-		<section><div id="recipeSection">
+	</div>
+		<section><br><div id="recipeSection">
 			<% for(int i = 0; i<recipeList.length ; i++) {%>
 				<hr size="1" width="700"> 
 				<div id="recipeContent" onclick="openInfoForm(<%=recipeList[i][0]%>);">
@@ -115,9 +115,9 @@
 					<% } %>
 					</th>
 					<td>
-					&nbsp;<b><%=recipeList[i][1]%></b><br>
-					&nbsp;재료 : <%=recipeList[i][4]%><br>
-					&nbsp;요리도구 : <%=recipeList[i][2]%><br>
+					&emsp;<b><%=recipeList[i][1]%></b><br><br>
+					&emsp;재료 : <%=recipeList[i][4]%><br>
+					&emsp;요리도구 : <%=recipeList[i][2]%><br>
 					</td>
 					</tr></table>
 				</div>
@@ -126,6 +126,7 @@
 			<hr size="1" width="700"> <h3>레시피가 없어요 ㅠ_ㅠ<br>여러분의 레시피를 공유해주세요!<br><a href="request.jsp">레시피 공유하러 가기</a></h3>
 			<% } %>
 			<hr size="1" width="700"> 
-		</div></section>
+		</div><br>
+		</section>
 </body>
 </html>

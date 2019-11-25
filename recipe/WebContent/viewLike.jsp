@@ -76,9 +76,9 @@
 					<% } %>
 					</th>
 					<td>
-					&nbsp;<b><%=recipeInfo[0]%></b><br>
-					&nbsp;재료 : <%=recipeInfo[3]%><br>
-					&nbsp;요리도구 : <%=recipeInfo[1]%><br>
+					&emsp;<b><%=recipeInfo[0]%></b><br><br>
+					&emsp;재료 : <%=recipeInfo[3]%><br>
+					&emsp;요리도구 : <%=recipeInfo[1]%><br>
 					</td>
 					</tr></table>
 				</div>
