@@ -19,8 +19,8 @@ public class RecipeDAO
 		try
 		{
 			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe";
-			String dbID = "young";
-			String dbPassword="asdf";
+			String dbID = "hyoj";
+			String dbPassword="1234";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		}
@@ -131,7 +131,6 @@ public class RecipeDAO
 			{
 				recipeContent[0] = rs.getString(1);
 				recipeContent[1] = rs.getString(2);
-				recipeContent[2] = rs.getString(3);
 				recipeContent[3] = rs.getString(4);
 				recipeContent[4] = rs.getString(5);
 			}
@@ -352,4 +351,189 @@ public class RecipeDAO
 			}
 			return 0;
 	}
+	
+	public String[][] reviewGet(String recipeNum)
+	{
+		String SQL = "SELECT id, content, image, name FROM review WHERE number = ?";
+		
+		try
+		{
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,recipeNum);
+			rs = pstmt.executeQuery();
+			
+			rs.last();
+			int rowCount = rs.getRow();
+			rs.beforeFirst();
+			int count = 0;
+			
+			String[][] reviewList = new String[rowCount][4];
+			
+			while (rs.next()) {
+				reviewList[count][0] = rs.getString(1);
+				reviewList[count][1] = rs.getString(2);
+				reviewList[count][2] = rs.getString(3);
+				reviewList[count][3] = rs.getString(4);
+			}
+				
+			return reviewList;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return null; //데이터베이스 오류
+	}
+	
+	public String[] reviewGGet(String userID, String recipeNum)
+	{
+		if (recipeNum != null) {
+			String SQL = "SELECT content, image FROM review WHERE id = ? AND number = ?";
+		
+			try
+			{
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1,userID);
+				pstmt.setString(2,recipeNum);
+				rs = pstmt.executeQuery();
+				
+				String[] reviewList = new String[2];
+				
+				while (rs.next()) {
+					reviewList[0] = rs.getString(1);
+					reviewList[1] = rs.getString(2);
+				}
+					
+				return reviewList;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		else {
+			String SQL = "SELECT number FROM review WHERE id = ?";
+			
+			try
+			{
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1,userID);
+				rs = pstmt.executeQuery();
+				
+				rs.last();
+				int rowCount = rs.getRow();
+				rs.beforeFirst();
+				int count = 0;
+				
+				String[] reviewList = new String[rowCount];
+				
+				while (rs.next()) {
+					reviewList[count] = rs.getString(1);
+				}
+					
+				return reviewList;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+			}
+		}
+		return null; //데이터베이스 오류
+	}
+	
+	public int reviewInput(String userID, String content, String image, String recipeNum, String userName)
+	{
+		String SQL = null;
+		
+		try
+		{
+			String SQL2 = "SELECT * FROM review WHERE id = ? and number = ?";
+			pstmt = conn.prepareStatement(SQL2);
+			pstmt.setString(1,userID);
+			pstmt.setString(2,recipeNum);
+			rs = pstmt.executeQuery();
+			
+			rs.last();
+			int rowCount2 = rs.getRow();
+			
+			if (rowCount2 != 0)
+				return -1;
+			else {
+			SQL = "INSERT INTO review (number, id, content, image, name) VALUES (?,?,?, ?,?)";
+			
+			pstmt = conn.prepareStatement(SQL);
+			pstmt.setString(1,recipeNum);
+			pstmt.setString(2,userID);
+			pstmt.setString(3,content);
+			pstmt.setString(4,image);
+			pstmt.setString(5,userName);
+			pstmt.executeUpdate();
+			
+			return 1;
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return 0; //데이터베이스 오류
+	}
+	
+	public int modifyReview (String userID, String number, String content, String image)
+	{
+		if (image == null) {
+			String SQL = "UPDATE review SET content = ? WHERE id = ? and number = ?";
+			try
+			{
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, content);
+				pstmt.setString(2, userID);
+				pstmt.setString(3, number);
+				pstmt.executeUpdate();
+				
+				return 1;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return 0;
+			}
+		}
+		else {
+			String SQL = "UPDATE review SET image = ? WHERE id = ? and number = ?";
+			try
+			{
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, image);
+				pstmt.setString(2, userID);
+				pstmt.setString(3, number);
+				pstmt.executeUpdate();
+				
+				return 1;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return 0;
+			}
+		}
+	}
+	
+	public int delReview (String userID, String number)
+	{
+		try {
+			String SQL = "DELETE FROM review WHERE number = ? AND id = ?";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setString(1, number);
+				pstmt.setString(2, userID);
+				pstmt.executeUpdate();
+				
+				return 1;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return 0;
+			}
+		}
 }

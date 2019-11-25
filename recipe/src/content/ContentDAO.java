@@ -19,8 +19,8 @@ public class ContentDAO {
 		try
 		{
 			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe";
-			String dbID = "young";
-			String dbPassword="asdf";
+			String dbID = "hyoj";
+			String dbPassword="1234";
 			Class.forName("com.mysql.jdbc.Driver");
 			conn = DriverManager.getConnection(dbURL, dbID, dbPassword);
 		}

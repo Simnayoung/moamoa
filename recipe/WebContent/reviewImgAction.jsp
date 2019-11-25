@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="user.UserDAO" %>
+<%@ page import="recipeList.RecipeDAO" %>
 <%@ page import="com.oreilly.servlet.MultipartRequest"%>
 <%@ page import="com.oreilly.servlet.multipart.DefaultFileRenamePolicy"%>
 <%@ page import="java.util.*" %>
@@ -17,6 +17,13 @@
 	String userID = null;
 	if(session.getAttribute("userID") != null)
 	  userID = (String) session.getAttribute("userID");
+	else {
+		PrintWriter script = response.getWriter();
+		script.println("<script>");
+		script.println("alert('로그인이 필요한 작업입니다!')");
+		script.println("window.close()");
+		script.println("</script>");
+	}
 	MultipartRequest multi = null;
 	int sizeLimit = 1*1024*1024;
 	String saveFolder = "userImg/"+userID+"/";
@@ -44,17 +51,21 @@
 		{
 			String name = (String)files.nextElement();
 			String filename = multi.getFilesystemName(name);
-
-			UserDAO userDAO = new UserDAO();
-			int result = userDAO.profile(userID, savePath+filename);
-			session.setAttribute("userProfile", savePath+filename);
+			String recipeNumber = null;
+			if (session.getAttribute("tempNumber")!=null) {
+				recipeNumber = (String) session.getAttribute("tempNumber");
+				RecipeDAO recipeDAO = new RecipeDAO();
+				int resultt = recipeDAO.modifyReview(userID, recipeNumber, null, savePath+filename);
+			}
+			
+			session.setAttribute("userReview", savePath+filename);
 		}
 
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('변경완료!')");
-		script.println("opener.parent.location.reload()");
 		script.println("window.close()");
+		script.println("opener.parent.location.reload()");
 		script.println("</script>");
 	}
 	catch (Exception e) {

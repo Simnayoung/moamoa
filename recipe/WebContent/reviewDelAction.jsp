@@ -6,7 +6,7 @@
 <head>
 <meta charset="EUC-KR">
 <%@ page import="java.util.*" %>
-<%@ page import="content.ContentDAO" %>
+<%@ page import="recipeList.RecipeDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
@@ -21,15 +21,16 @@
 	  userName = (String) session.getAttribute("userName");
 	  }
 	
-	ContentDAO contentDAO = new ContentDAO();
-	int result = contentDAO.delQuest(userID, number);
+	RecipeDAO recipeDAO = new RecipeDAO();
+	int result = recipeDAO.delReview(userID, number);
 	
 	if(result == 1)
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('삭제 완료!')");
-		script.println("location.href='question.jsp?choice=0'");
+		script.println("window.close()");
+		script.println("opener.parent.location.reload()");
 		script.println("</script>");
 	}
 	else if(result == 0)

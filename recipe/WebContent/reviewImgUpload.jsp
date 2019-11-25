@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-		<form method="post" action="recipeimgAction.jsp" enctype="multipart/form-data">		
-			<input type="file" name="profile"><br>							
+		<form method="post" action="reviewImgAction.jsp" enctype="multipart/form-data">		
+			<input type="file" name="reviewImg"><br>							
 			<input type="submit" value="사진 변경">
 		</form>
 </body>
