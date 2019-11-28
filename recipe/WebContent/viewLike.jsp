@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=350, height=400, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=410, height=400, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -42,25 +42,28 @@
  %>
 	<div id="container">
 		<div id="navi">
+		<div id = "title">
+				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+		</div>
 			<ul class="h">
-				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
+		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
-                     	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
-                        <li class="l"><a class="h" href="rename.jsp">회원정보수정</a></li>                  
+                     	<li class="l"><a class="ha" href="logoutAction.jsp">로그아웃</a></li> 
+                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                  
                      </ul>
                   </li>
                </ul></div>
 			</ul>
 		</div>
-	</div><br>
-		<section>
+	</div>
+		<section><br>
 		<a href="viewLike.jsp?choice=0">[전체 보기]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=1">[발도장찍은 레시피]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=2">[후기 남긴 레시피]</a>
 			<% if (choice.equals("0")) { 
 			for(int i = 0; i<searchList.length ; i++) {

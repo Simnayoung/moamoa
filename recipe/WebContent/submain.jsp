@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=350, height=400, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=410, height=400, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -36,21 +36,24 @@
  %>
 	<div id="container">
 		<div id="navi">
+		<div id = "title">
+				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+		</div>
 			<ul class="h">
-				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
  		<%
             if(userID == null) // 로그인이 되어 있지 않을 시에만 보여줌
             {
          %>
          <div id="menubar">
                <ul class="h">
-                  <li class="l"><a class="h" href="#">접속하기</a>
+                  <li class="l"><a class="h" href="#">로그인</a>
                      <ul class="h">
                         <form method="post" action="loginAction.jsp">
-                        	<font><center>로그인</center></font>
-                        	<input type="text" placeholder="아이디" name="userID" maxlength="20"><br>
-                        	<input type="password" placeholder="비밀번호" name="userPassword" maxlength="20"><br>
-                        	<input type="submit" value="로그인">
+                        	<div class = "p">
+		                       	<input type="text" placeholder="아이디" name="userID" maxlength="20" style = "width: 100px;"><br>
+		                       	<input type="password" placeholder="비밀번호" name="userPassword" maxlength="20" style = "width: 100px;"><br>
+		                       	<input type="submit" value="로그인">
+	                       	</div>
                         </form>        
                      </ul>
                    <li class="l"><a class="h" href="join.jsp">회원가입</a></li>
@@ -61,16 +64,17 @@
             else // 로그인 되어 있을 시에만 보여줌
             {
          %>
+         <li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
-                     	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
-                        <li class="l"><a class="h" href="rename.jsp">정보수정</a></li>                  
+                     	<li class="l"><a class="ha href="logoutAction.jsp">로그아웃</a></li> 
+                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                  
                      </ul>
                   </li>
                </ul></div>
@@ -79,8 +83,8 @@
          %>
 			</ul>
 		</div>
-	</div><br>
-	<section>
+	</div>
+	<section><br>
 		<div id="category">
 			<table><form method="post" action="listmain.jsp">
 				<tr>
@@ -115,9 +119,7 @@
 					<label><input type="checkbox" name="tool" value="pot">냄비</label>
 				</td></tr>
 			</form></table>
-		</div>
-	</section><br>
-		<section><div id="recipeSection">
+		</div><div id="recipeSection">
 			<% for(int i = 0; i<recipeList.length ; i++) {%>
 				<hr size="1" width="700"> 
 				<div id="recipeContent" onclick="openInfoForm(<%=recipeList[i][0]%>);">
@@ -128,9 +130,9 @@
 					<% } %>
 					</th>
 					<td>
-					&nbsp;<b><%=recipeList[i][1]%></b><br>
-					&nbsp;재료 : <%=recipeList[i][4]%><br>
-					&nbsp;요리도구 : <%=recipeList[i][2]%><br>
+					&emsp;<b><%=recipeList[i][1]%></b><br>
+					&emsp;재료 : <%=recipeList[i][4]%><br>
+					&emsp;요리도구 : <%=recipeList[i][2]%><br>
 					</td>
 					</tr></table>
 				</div>
@@ -139,7 +141,7 @@
 			<hr size="1" width="700"> <h3>레시피가 없어요 ㅠ_ㅠ<br>여러분의 레시피를 공유해주세요!<br><a href="request.jsp">레시피 공유하러 가기</a></h3>
 			<% } %>
 			<hr size="1" width="700"> 
-		</div></section>
+		</div><br></section>
 		<%
 		Cookie[] ck = request.getCookies();
 		

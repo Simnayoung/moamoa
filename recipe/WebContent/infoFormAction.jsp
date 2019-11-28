@@ -8,6 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/table.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
 <script type="text/javascript">
 	var g_oInterval = null;
@@ -80,23 +81,23 @@
 	<table>
 		<tr>
 			<th>이름</th>
-			<td align="center" width=300px><%= recipeInfo[0] %></td>
+			<td align="center" width=400px><%= recipeInfo[0] %></td>
 		</tr>
 		<tr>
 			<th></th>
-			<td align="center"><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;"></td>
+			<td id = "recipe_img" align="center"><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 400px; max-heigt:300px; width: auto; height: auto;"></td>
 		</tr>
 		<tr>
-			<th>재료</th>
-			<td align="center" width=300px><%= recipeInfo[3] %></td>
+			<th valign ="top">재료</th>
+			<td align="center" width=400px><%= recipeInfo[3] %></td>
 		</tr>
 		<tr>
 			<th>조리도구</th>
-			<td align="center" width=300px><%= recipeInfo[1] %></td>
+			<td align="center" width=400px><%= recipeInfo[1] %></td>
 		</tr>
 		<tr>
-			<th>방법</th>
-			<td align="center" width=300px><%= recipeInfo[2] %></td>
+			<th valign ="top">방법</th>
+			<td width =400px><%= recipeInfo[2] %></td>
 		</tr>
 		<% if (likeInfo != null) { %><tr>
 			<th colspan="2"><br><img src="<%=likeInfo%>" onclick="changeImage(<%=recipeDAO.recipeLike(recipeNumber, userID, 1)%>)" style="width: 10%; height: auto; cursor: pointer;" id="imgInfo"></th>
