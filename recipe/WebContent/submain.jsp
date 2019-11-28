@@ -161,21 +161,21 @@
 					check++;
 				}
 			}	%>
-			<div id="sidebar">
-			최근 본 레시피
+			<div id="sidebar"><br>
+			<b>최근 본 레시피</b>
 		<%	for (int i = relist.length-2; i >=0 ; i--) {
 			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
 				%>
 			<div onclick="openInfoForm(<%=relist[i]%>);">
-			<hr size="1" width="80"> 
-				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+			<hr size="1" width="100"> 
+				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto; margin: 0 0 0 30px;">
 				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 				<% } %>
 				<br><%= recipeInfo[0] %>
 			</div>
 		<%
 			} %>
-		<hr size="1" width="80"> 
+		<hr size="1" width="100"> 
 		</div>
 		<%
 		}
