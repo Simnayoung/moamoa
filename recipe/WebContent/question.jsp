@@ -14,7 +14,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("questFormAction.jsp?questNum="+recipeNum, "_blank", "width=410, height=400, resizable=no, scrollbars=yes");
+		window.open("questFormAction.jsp?questNum="+recipeNum, "_blank", "width=420, height=400, resizable=no, scrollbars=yes");
 	}
 	function openModiForm(recipeNum) {
 		window.open("modifyQAction.jsp?number="+recipeNum, "_blank", "width=600, height=250, resizable=no, scrollbars=yes");
@@ -92,7 +92,7 @@
 				<% } else {}%>
 				</div>
 				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][3]%>);">
-					&nbsp;<b><%=questList[i][1]%></b>&nbsp;댓글수[<%=questList[i][5]%>]<br>
+					&nbsp;<b><%=questList[i][1]%></b>&nbsp;[<%=questList[i][5]%>]<br>
 					&nbsp;작성자 : <%=questList[i][4]%><br>
 					&nbsp;내용 : 
 					<% if (questList[i][2].length() < 50) { %><%=questList[i][2]%><br>
@@ -105,7 +105,7 @@
 				<a href="#" onclick="openModiForm(<%=questList[i][2]%>); return false;">[수정]</a><br>
 				</div>
 				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][2]%>);">
-					&nbsp;<b><%=questList[i][0]%></b>&nbsp;댓글수[<%=questList[i][3]%>]<br>
+					&nbsp;<b><%=questList[i][0]%></b>&nbsp;[<%=questList[i][3]%>]<br>
 					&nbsp;내용 : <% if (questList[i][1].length() < 50) { %><%=questList[i][1] %><br>
 					<% } else { %><%= questList[i][1].substring(0, 50)%> ...<br> <% } %>
 				</div>
@@ -132,6 +132,7 @@
 					check++;
 				}
 			}	%>
+			<!--
 			<div id="sidebar"><br>
 			<b>최근 본 레시피</b>
 		<%	for (int i = relist.length-2; i >=0 ; i--) {
@@ -139,8 +140,8 @@
 				%>
 			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="100"> 
-				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto; margin: 0 0 0 30px;">
-				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
+				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
 				<% } %>
 				<br><%= recipeInfo[0] %>
 			</div>
@@ -148,6 +149,7 @@
 			} %>
 		<hr size="1" width="100"> 
 		</div>
+		-->
 		<%
 		}
 		%>

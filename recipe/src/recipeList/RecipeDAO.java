@@ -226,6 +226,26 @@ public class RecipeDAO
 		return 0;
 	}
 	
+	public int recipeLikeNum(String recipeNum) {
+		String SQL = "SELECT COUNT(*) FROM like_info where number="+recipeNum;
+		int total = 0;
+		try
+		{
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(SQL);
+		
+			if (rs.next())
+				total = rs.getInt(1);
+			rs.close();
+			return total;
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();
+		}
+		return 0;
+	}
+	
 	public int recipeInsert(String name, String content, String cate, String[] ingredients, String[] tools, String material, String cookware)
 	{
 		String SQL = "SELECT * FROM recipe WHERE name = ?";

@@ -11,7 +11,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=410, height=400, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=425, height=700, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -129,10 +129,10 @@
 					<% } else { %><img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
 					<% } %>
 					</th>
-					<td>
-					&emsp;<b><%=recipeList[i][1]%></b><br>
-					&emsp;재료 : <%=recipeList[i][4]%><br>
-					&emsp;요리도구 : <%=recipeList[i][2]%><br>
+					<td style="padding-left:20px;">
+					<b><%=recipeList[i][1]%></b><br><br>
+					재료 : <%=recipeList[i][4]%><br>
+					요리도구 : <%=recipeList[i][2]%><br>
 					</td>
 					</tr></table>
 				</div>
@@ -168,8 +168,8 @@
 				%>
 			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="100"> 
-				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto; margin: 0 0 0 30px;">
-				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
+				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
 				<% } %>
 				<br><%= recipeInfo[0] %>
 			</div>

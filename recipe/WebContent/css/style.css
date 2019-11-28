@@ -21,12 +21,13 @@ section {
 	top: 270px;
 	margin-right: -550px;
 	text-align: center;
-	width: 130px;
+	width: 120px;
 	background-color:rgba(255,255,255,0.7);
 	border-radius:5px;
 	border-bottom: 4px solid rgb(255,197,19);
 	border-right: 4px solid rgb(255,197,19);
 	font-family : Sans-Serif;
+	font-size : 10pt;
 }
 #recipeSection {
 	overflow-x: hidden;
@@ -139,7 +140,8 @@ li.c img{
 	height: 80px;
 	margin : 0px 18px 10px 18px;
 }
-li.c a:link, li.c a:hover, li.c a:visited, li.c a:active{
+
+a:link, a:hover, a:visited, a:active{
 	color : black;
 }
 #menubar li.l ul.h{
@@ -180,4 +182,5 @@ input[type=submit] {
 	width: 150px;
 	text-align : center;
 }
+
 </style>

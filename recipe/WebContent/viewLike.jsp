@@ -12,7 +12,7 @@
 <title>Insert title here</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=410, height=400, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=425, height=700, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -63,7 +63,7 @@
 			</ul>
 		</div>
 	</div>
-		<section><br>
+		<section><br><div id = "recipeSection">
 		<a href="viewLike.jsp?choice=0">[전체 보기]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=1">[발도장찍은 레시피]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=2">[후기 남긴 레시피]</a>
 			<% if (choice.equals("0")) { 
 			for(int i = 0; i<searchList.length ; i++) {
@@ -120,7 +120,7 @@
 					<% } %>
 					</th>
 					<td>
-					&nbsp;<b><%=recipeInfo[0]%></b><br>
+					&nbsp;<b><%=recipeInfo[0]%></b><br><br>
 					&nbsp;재료 : <%=recipeInfo[3]%><br>
 					&nbsp;요리도구 : <%=recipeInfo[1]%><br>
 					</td>
@@ -143,10 +143,10 @@
 					<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
 					<% } %>
 					</th>
-					<td>
-					&nbsp;<b><%=recipeInfo[0]%></b><br>
-					&nbsp;재료 : <%=recipeInfo[3]%><br>
-					&nbsp;요리도구 : <%=recipeInfo[1]%><br>
+					<td style="padding-left:20px;">
+					<b><%=recipeInfo[0]%></b><br>
+					재료 : <%=recipeInfo[3]%><br>
+					요리도구 : <%=recipeInfo[1]%><br>
 					</td>
 					</tr></table>
 				</div>
@@ -155,7 +155,7 @@
 				<hr size="1" width="700"> <h3>아직 후기를 남기지 않으셨군요!<br><a href="main.jsp">후기 남기러 가기</a></h3>
 				<% } else {} } %>
 			<hr size="1" width="700"> 
-		</section>
+		</div></section>
 		<%
 		Cookie[] ck = request.getCookies();
 		
@@ -182,8 +182,8 @@
 				%>
 			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="100"> 
-				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto; margin: 0 0 0 30px;">
-				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
+				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
 				<% } %>
 				<br><%= recipeInfo[0] %>
 			</div>
