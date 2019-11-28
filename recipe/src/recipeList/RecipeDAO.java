@@ -131,6 +131,7 @@ public class RecipeDAO
 			{
 				recipeContent[0] = rs.getString(1);
 				recipeContent[1] = rs.getString(2);
+				recipeContent[2] = rs.getString(3);
 				recipeContent[3] = rs.getString(4);
 				recipeContent[4] = rs.getString(5);
 			}
@@ -204,7 +205,7 @@ public class RecipeDAO
 			{
 				if (plug == 2) {
 					pstmt = conn.prepareStatement(SQL);
-					pstmt.setInt(1,Integer.parseInt(recipeNum));
+					pstmt.setString(1,recipeNum);
 					pstmt.setString(2, UserID);
 					pstmt.executeUpdate();
 				}
@@ -374,6 +375,8 @@ public class RecipeDAO
 				reviewList[count][1] = rs.getString(2);
 				reviewList[count][2] = rs.getString(3);
 				reviewList[count][3] = rs.getString(4);
+				
+				count++;
 			}
 				
 			return reviewList;
@@ -429,6 +432,7 @@ public class RecipeDAO
 				
 				while (rs.next()) {
 					reviewList[count] = rs.getString(1);
+					count++;
 				}
 					
 				return reviewList;

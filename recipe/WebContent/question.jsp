@@ -7,6 +7,7 @@
 <meta charset="UTF-8">
 <%@ page import="java.util.*" %>
 <%@ page import="content.ContentDAO" %>
+<%@ page import="recipeList.RecipeDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
@@ -99,12 +100,51 @@
 				</div>
 				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][2]%>);">
 					&nbsp;<b><%=questList[i][0]%></b>&nbsp;댓글수[<%=questList[i][3]%>]<br>
-					&nbsp;내용 : <% if (questList[i][1].length() < 50) {%><%=questList[i][1]%><br>
-					<% } else { %><%= questList[i][1].substring(0, 50) %> ...<br> <% } %>
+					&nbsp;내용 : <% if (questList[i][1].length() < 50) { %><%=questList[i][1] %><br>
+					<% } else { %><%= questList[i][1].substring(0, 50)%> ...<br> <% } %>
 				</div>
 			<% } } %>
 			<hr size="1" width="700"> 
 		</section>
+		<%
+		Cookie[] ck = request.getCookies();
+		
+		if (ck != null) {
+			RecipeDAO recipeDAO = new RecipeDAO();
+			String[] relist = new String[ck.length];
+			int check = 0;
+			if (relist.length > 4) {
+				for (Cookie c : ck) {
+					check++;
+					if (check >= ck.length-4)
+						relist[check-ck.length+4] = c.getValue();
+				}
+			}
+			else {
+				for (Cookie c : ck) {
+					relist[check] = c.getValue();
+					check++;
+				}
+			}	%>
+			<div id="sidebar">
+			최근 본 레시피
+		<%	for (int i = relist.length-2; i >=0 ; i--) {
+			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
+				%>
+			<div onclick="openInfoForm(<%=relist[i]%>);">
+			<hr size="1" width="80"> 
+				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+				<% } %>
+				<br><%= recipeInfo[0] %>
+			</div>
+		<%
+			} %>
+		<hr size="1" width="80"> 
+		</div>
+		<%
+		}
+		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
 	</div>

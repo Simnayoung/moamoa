@@ -49,7 +49,10 @@
 		<tr><th colspan="2" align="center">
 		<img src="<%=reviewInfo[1]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
 		<br><a href="#" onclick="openFile(); return false;">사진 변경</a>
-		</th></tr><% } %>
+		</th></tr><% } 
+		else { %>
+		<tr><th colspan="2" align="center"><a href="#" onclick="openFile(); return false;">사진 변경</a>
+		</th></tr> <% } %>
 		<tr>
 			<th>내용</th>
 			<td width=300px><textarea rows="10" cols="80" name="reviewContent"><%= reviewInfo[0] %></textarea></td>

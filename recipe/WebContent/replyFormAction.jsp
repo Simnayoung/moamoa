@@ -34,7 +34,7 @@
 	}
 	
 	ContentDAO contentDAO = new ContentDAO();
-	int result = contentDAO.replyInput(userID, content,questNumber,userName);
+	int result = contentDAO.replyInput(userID, content.replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>"),questNumber,userName);
 	
 	if(result == 1)
 	{

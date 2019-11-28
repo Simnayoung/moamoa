@@ -114,6 +114,44 @@
 			<% } %>
 			<hr size="1" width="700"> 
 		</div></section>
+		<%
+		Cookie[] ck = request.getCookies();
+		
+		if (ck != null) {
+			String[] relist = new String[ck.length];
+			int check = 0;
+			if (relist.length > 4) {
+				for (Cookie c : ck) {
+					check++;
+					if (check >= ck.length-4)
+						relist[check-ck.length+4] = c.getValue();
+				}
+			}
+			else {
+				for (Cookie c : ck) {
+					relist[check] = c.getValue();
+					check++;
+				}
+			}	%>
+			<div id="sidebar">
+			최근 본 레시피
+		<%	for (int i = relist.length-2; i >=0 ; i--) {
+			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
+				%>
+			<div onclick="openInfoForm(<%=relist[i]%>);">
+			<hr size="1" width="80"> 
+				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+				<% } %>
+				<br><%= recipeInfo[0] %>
+			</div>
+		<%
+			} %>
+		<hr size="1" width="80"> 
+		</div>
+		<%
+		}
+		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
 	</div>

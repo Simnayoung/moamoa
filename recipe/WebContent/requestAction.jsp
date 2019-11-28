@@ -92,7 +92,7 @@
 	}
 	
 	RecipeDAO recipeDAO = new RecipeDAO();
-	int result = recipeDAO.recipeInsert(name, content, cate, ingredients, tools, material, cookware);
+	int result = recipeDAO.recipeInsert(name, content.replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>"), cate, ingredients, tools, material, cookware);
 	
 	if(result == -1)
 	{

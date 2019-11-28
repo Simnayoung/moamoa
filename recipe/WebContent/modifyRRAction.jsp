@@ -22,7 +22,7 @@
 		userName = (String) session.getAttribute("userName");
 	}
 	
-	String content = request.getParameter("reviewtContent");
+	String content = request.getParameter("reviewContent");
 	
 	if (content == null)
 	{
@@ -34,15 +34,15 @@
 	}
 	
 	RecipeDAO recipeDAO = new RecipeDAO();
-	int result = recipeDAO.modifyReview(userID, recipeNumber, content, null);
+	int result = recipeDAO.modifyReview(userID, recipeNumber, content.replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>"), null);
 	
 	if(result == 1)
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('수정 완료!')");
+		script.println("opener.parent.location.reload()");
 		script.println("window.close()");
-		script.println("opener.location.reload()");
 		script.println("</script>");
 	}
 	else if(result == 0)

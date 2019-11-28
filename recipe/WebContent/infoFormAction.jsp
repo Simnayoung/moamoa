@@ -29,8 +29,11 @@
 </script>
 </head>
 <body>
-	<%
+	<%	
 	String recipeNumber = request.getParameter("recipeNum");
+	Cookie c = new Cookie(recipeNumber, recipeNumber);
+	c.setMaxAge(60*60);
+	response.addCookie(c);
 
 	RecipeDAO recipeDAO = new RecipeDAO();
 	String[] recipeInfo = recipeDAO.recipeInfo(recipeNumber);
@@ -57,19 +60,22 @@
 	%>
 	<script type="text/javascript">
 	function changeImage(num) {
-		if (num == 1) {
-			var test = '<%=recipeDAO.recipeLike(recipeNumber,userID, 2)%>';
-			if (test != 0) {
+		const httpRequest = new XMLHttpRequest();
+
+		httpRequest.onreadystatechange = function() {
+			if (num == 1) {
 				document.getElementById("imgInfo").src = "/recipe/cateImg/unlike.png";
+				
+			}
+			else if (num == 0) {
+				document.getElementById("imgInfo").src = "/recipe/cateImg/like.png";
 			}
 		}
-		else if (num == 0) {
-			var test = '<%=recipeDAO.recipeLike(recipeNumber,userID, 3)%>';
-			if (test != 0) {
-				document.getElementById("imgInfo").src = "/recipe/cateImg/like.png";
-		}
+		
+		const url = '/recipe/recipeLike.jsp?' + "recipeNumber=" + <%=recipeNumber%> + "&type=" + (num == 1 ? "2" : "3");
+		httpRequest.open('GET', url, true);
+		httpRequest.send(null);
 	}
-}
 	</script>
 	<table>
 		<tr>
@@ -97,15 +103,15 @@
 		</tr><% } %>
 		<% for (int i = 0; i<reviewInfo.length; i++) { %>
 		<tr>
-			<th>작성자 : <b><%= reviewInfo[i][2] %></b>
+			<th>작성자 : <b><%= reviewInfo[i][3] %></b>
 				<% if (reviewInfo[i][0].equals(userID)) {%>
-				<br><a href="#" onclick="openModiForm(<%=reviewInfo[i][0]%>); return false;">[수정]</a>&nbsp;|&nbsp;
+				<br><a href="#" onclick="openModiForm(<%=recipeNumber%>); return false;">[수정]</a>&nbsp;|&nbsp;
 				<a href="reviewDelAction.jsp?number=<%=recipeNumber%>">[삭제]</a><br>
 				<% } else {}%>
 			</th>
-			<td width=300px><% if (reviewInfo[i][1] != null) {%>
-			<img src="<%=reviewInfo[i][1]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
-			<br><% } %><%= reviewInfo[i][0] %></td>
+			<td width=300px><% if (reviewInfo[i][2] != null) {%>
+			<img src="<%=reviewInfo[i][2]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+			<br><% } %><%= reviewInfo[i][1] %></td>
 		</tr>
 		<% } %>
 		<% if (userID != null) { %><tr>
@@ -116,7 +122,7 @@
 				<% } %>
 				<a href="#" onclick="openFile(); return false;">사진 변경</a>
 				<form method="post" action="reviewFormAction.jsp?number=<%=recipeNumber%>">
-					<textarea rows="10" cols="40" name="reviewContent">내용</textarea><br><br>
+					<textarea rows="10" cols="40" name="reviewContent"></textarea><br><br>
 				<input type="submit" value="등록"></form>
 			</td>
 		</tr>

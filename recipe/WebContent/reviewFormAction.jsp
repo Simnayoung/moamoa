@@ -26,15 +26,15 @@
 			userReview = (String) session.getAttribute("userReview");
 	
 		RecipeDAO recipeDAO = new RecipeDAO();
-		int result = recipeDAO.reviewInput(userID, content, userReview, recipeNum, userName);
+		int result = recipeDAO.reviewInput(userID, content.replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>"), userReview, recipeNum, userName);
 		
 		if(result == 1)
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('등록완료!')");
-			script.println("opener.parent.location.reload()");
-			script.println("window.close()");
+			script.println("window.location = document.referrer");
+			session.setAttribute("userReview", null);
 			script.println("</script>");
 		}
 		else if(result == 0)

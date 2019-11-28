@@ -113,7 +113,7 @@
 2) 당근 자르기<br>
 3) 후라이팬에 볶기
 <-- 양식 꼭 지켜주세요! -->
-<-- 띄어쓰기하기 전에 꼭 br 붙여주세요! --></textarea></td>	
+</textarea></td>	
 			</tr>
 		</table></div>
 			<input type="submit" value="레시피요청"><br><br>

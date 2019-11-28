@@ -35,7 +35,7 @@
 	}
 	
 	ContentDAO contentDAO = new ContentDAO();
-	int result = contentDAO.modifyQuest(userID, questNumber,title, content);
+	int result = contentDAO.modifyQuest(userID, questNumber,title, content.replaceAll(" ", "&nbsp;").replaceAll("<", "&lt;").replaceAll(">","&gt;").replaceAll("\n","<br>"));
 	
 	if(result == 1)
 	{

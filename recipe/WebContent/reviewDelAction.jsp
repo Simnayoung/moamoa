@@ -29,8 +29,7 @@
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
 		script.println("alert('삭제 완료!')");
-		script.println("window.close()");
-		script.println("opener.parent.location.reload()");
+		script.println("window.location = document.referrer");
 		script.println("</script>");
 	}
 	else if(result == 0)
