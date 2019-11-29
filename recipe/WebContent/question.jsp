@@ -91,8 +91,8 @@
 				<a href="questDelAction.jsp?number=<%=questList[i][3]%>">[삭제]</a><br>
 				<% } else {}%>
 				</div>
-				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][3]%>);">
-					&nbsp;<b><%=questList[i][1]%></b>&nbsp;[<%=questList[i][5]%>]<br>
+				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][3]%>);" style =" padding-left : 20px;">
+					&nbsp;<b><%=questList[i][1]%></b>&emsp;[<%=questList[i][5]%>]<br><br>
 					&nbsp;작성자 : <%=questList[i][4]%><br>
 					&nbsp;내용 : 
 					<% if (questList[i][2].length() < 50) { %><%=questList[i][2]%><br>
@@ -101,11 +101,11 @@
 			<% } }
 			else if (choice.equals("1")) { for(int i = questList.length-1; i>=0 ; i--) {%>
 				<hr size="1" width="700"> 
-				<div style="width: 850px; text-align: right;">
+				<div style="width: 840px; text-align: right;">
 				<a href="#" onclick="openModiForm(<%=questList[i][2]%>); return false;">[수정]</a><br>
 				</div>
-				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][2]%>);">
-					&nbsp;<b><%=questList[i][0]%></b>&nbsp;[<%=questList[i][3]%>]<br>
+				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][2]%>);" style =" padding-left : 20px;">
+					&nbsp;<b><%=questList[i][0]%></b>&emsp;[<%=questList[i][3]%>]<br><br>
 					&nbsp;내용 : <% if (questList[i][1].length() < 50) { %><%=questList[i][1] %><br>
 					<% } else { %><%= questList[i][1].substring(0, 50)%> ...<br> <% } %>
 				</div>
