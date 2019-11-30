@@ -226,26 +226,6 @@ public class RecipeDAO
 		return 0;
 	}
 	
-	public int recipeLikeNum(String recipeNum) {
-		String SQL = "SELECT COUNT(*) FROM like_info where number="+recipeNum;
-		int total = 0;
-		try
-		{
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(SQL);
-		
-			if (rs.next())
-				total = rs.getInt(1);
-			rs.close();
-			return total;
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return 0;
-	}
-	
 	public int recipeInsert(String name, String content, String cate, String[] ingredients, String[] tools, String material, String cookware)
 	{
 		String SQL = "SELECT * FROM recipe WHERE name = ?";
@@ -277,7 +257,7 @@ public class RecipeDAO
 					}
 				if (tools != null) {
 					for (int i = 0; i<tools.length;i++) {
-						if (ingredients.length==0 && i == 0)
+						if (ingredients == null && i == 0)
 							SQL2 += " recipe."+tools[i]+" = 1";
 						else
 							SQL2 += " AND recipe."+tools[i]+" = 1";
@@ -300,48 +280,72 @@ public class RecipeDAO
 				if (rowCount2 != 0)
 					return 0;
 				else {
-					String SQL3 = "INSERT INTO recipe (name, cookware";
-					
-					if (ingredients != null) {
-						for (int i = 0; i<ingredients.length ; i++) {
-							SQL3 += ", "+ingredients[i];
-						}
-					}
-					if (tools != null) {
-						for (int i = 0; i<tools.length;i++) {
-							SQL3 += ", "+tools[i];
-						}
-					}
-					SQL3 += ", "+cate+") VALUES (?, ?";
-					if (ingredients != null && tools != null) {
-						for (int i = 0; i<(ingredients.length+tools.length) ; i++) {
-							SQL3 += ", 1";
-						}
-					}
-					SQL3 += ", 1)";
-
-					
-					PreparedStatement pres = conn.prepareStatement(SQL3);
-					pres.setString(1, name);
-					pres.setString(2, cookware);
-					pres.executeUpdate();
-					
-					String SQL4 = "SELECT number FROM recipe ORDER BY number DESC LIMIT 1";
+					String SQL6 = "SELECT content FROM recipe_info";
 					stmt = conn.createStatement();
-					rs = stmt.executeQuery(SQL4);
-					int recipeNumber = 0;
-					while(rs.next())
-						recipeNumber = rs.getInt(1);
+					rs = stmt.executeQuery(SQL6);
+					int plug = 1;
 					
-					String SQL5 = "INSERT INTO recipe_info (number, content, material) VALUES (?, ? ,?)";
-					pres = conn.prepareStatement(SQL5);
-					pres.setInt(1, recipeNumber);
-					pres.setString(2, content);
-					pres.setString(3, material);
-
-					pres.executeUpdate();
+					while(rs.next()) {
+						String contentCheck = rs.getString(1);
+						int percent = 0;
+						for (int k = 0; k<contentCheck.length();k++) {
+							if (k>content.length()-1)
+								break;
+							if (content.charAt(k) == contentCheck.charAt(k))
+								percent++;
+						}
+						if ((percent/content.length())*100 > 80) {
+							plug = 0;
+							break;
+						}
+					}
 					
-					return recipeNumber;
+					if (plug == 1) {
+						String SQL3 = "INSERT INTO recipe (name, cookware";
+						
+						if (ingredients != null) {
+							for (int i = 0; i<ingredients.length ; i++) {
+								SQL3 += ", "+ingredients[i];
+							}
+						}
+						if (tools != null) {
+							for (int i = 0; i<tools.length;i++) {
+								SQL3 += ", "+tools[i];
+							}
+						}
+						SQL3 += ", "+cate+") VALUES (?, ?";
+						if (ingredients != null && tools != null) {
+							for (int i = 0; i<(ingredients.length+tools.length) ; i++) {
+								SQL3 += ", 1";
+							}
+						}
+						SQL3 += ", 1)";
+	
+						
+						PreparedStatement pres = conn.prepareStatement(SQL3);
+						pres.setString(1, name);
+						pres.setString(2, cookware);
+						pres.executeUpdate();
+						
+						String SQL4 = "SELECT number FROM recipe ORDER BY number DESC LIMIT 1";
+						stmt = conn.createStatement();
+						rs = stmt.executeQuery(SQL4);
+						int recipeNumber = 0;
+						while(rs.next())
+							recipeNumber = rs.getInt(1);
+						
+						String SQL5 = "INSERT INTO recipe_info (number, content, material) VALUES (?, ? ,?)";
+						pres = conn.prepareStatement(SQL5);
+						pres.setInt(1, recipeNumber);
+						pres.setString(2, content);
+						pres.setString(3, material);
+	
+						pres.executeUpdate();
+						
+						return recipeNumber;
+					}
+					else
+						return 0;
 				}
 			}
 		}
