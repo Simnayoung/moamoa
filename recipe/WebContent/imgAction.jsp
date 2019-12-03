@@ -52,7 +52,7 @@
 
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('(๑•̀ㅂ•́)و'\n변경이 완료되었습니다!')");
+		script.println("alert('변경이 완료되었습니다!')");
 		script.println("opener.parent.location.reload()");
 		script.println("window.close()");
 		script.println("</script>");
@@ -61,7 +61,7 @@
 		e.printStackTrace();
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('( ⁰▱⁰ )!!!\n변경을 실패했습니다!')");
+		script.println("alert('변경을 실패했습니다!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
