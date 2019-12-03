@@ -9,7 +9,7 @@
 <meta charset="UTF-8">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <link href="css/renacss.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 <%
@@ -25,7 +25,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요한 서비스 입니다.')");
+		script.println("alert('로그인이 필요한 서비스 입니다!')");
 		script.println("location.href = 'main.jsp'");
 		script.println("</script>");
 	}
@@ -55,7 +55,7 @@
 	</div>
 	<section><br>
 	<div id = "reque">
-		<h3>여러분의 소중한 레시피를 공유해주세요!</h3>
+		<h3>(❁´▽`❁)<br>여러분의 소중한 레시피를 공유해주세요!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
 		<br><br>
 		<form method="post" action="requestAction.jsp">
@@ -114,8 +114,8 @@
 			<tr>
 			<th align="left">조리 순서</th>
 			<td><textarea rows="15" cols="80" name="recipeContent">
-1) 양파 자르기<br>
-2) 당근 자르기<br>
+1) 양파 자르기
+2) 당근 자르기
 3) 후라이팬에 볶기
 <-- 양식 꼭 지켜주세요! -->
 </textarea></td>	

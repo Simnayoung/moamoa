@@ -8,7 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
 		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank", "width=425, height=700, resizable=no, scrollbars=yes");
@@ -24,10 +24,12 @@
     String userID = null;
     String userName = null;
     String userProfile = null;
+    String userMode = null;
     if(session.getAttribute("userID") != null){
   	  userID = (String) session.getAttribute("userID");
   	  userName = (String) session.getAttribute("userName");
   	  userProfile = (String) session.getAttribute("userProfile");
+  	  userMode = (String) session.getAttribute("diet");
   	  }
       if(session.getAttribute("category") != null)
     	  session.setAttribute("category", null);
@@ -103,9 +105,22 @@
 				<div id="recipeContent" onclick="openInfoForm(<%=recipeList[i][0]%>);">
 					<table><tr>
 					<th>
-					<% if (recipeList[i][5] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
-					<% } else { %><img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
-					<% } %>
+					<% if (recipeList[i][5] == null) { 
+					if (userID != null && userMode.equals("1")) { %>
+						<img src="/recipe/cateImg/dietfood.png" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<% }
+						else { %>
+						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+					<% } }
+					else {
+						if (userID != null && userMode.equals("1")) { %>
+							<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+							</div> <% }
+						else { %>
+						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<% } } %>
 					</th>
 					<td style="padding-left:20px;">
 					<b><%=recipeList[i][1]%></b><br><br>
@@ -121,31 +136,54 @@
 		Cookie[] ck = request.getCookies();
 		
 		if (ck != null) {
-			String[] relist = new String[ck.length];
+			int len = 0;
+			for (Cookie c : ck) {
+				if (c.getValue().length() > 5)
+					continue;
+				len++;
+			}
+			String[] relist = null;
 			int check = 0;
-			if (relist.length > 4) {
+			if (len > 4) {
+				relist = new String[3];
 				for (Cookie c : ck) {
+					if (check >= len-4 && check < len-1)
+						relist[check-len+4] = c.getValue();					
 					check++;
-					if (check >= ck.length-4)
-						relist[check-ck.length+4] = c.getValue();
 				}
 			}
 			else {
+				relist = new String[len-1];
 				for (Cookie c : ck) {
+					if (check >= len-1)
+						break;
 					relist[check] = c.getValue();
 					check++;
 				}
 			}	%>
 			<div id="sidebar"><br>
 			<b>최근 본 레시피</b>
-		<%	for (int i = relist.length-2; i >=0 ; i--) {
+		<%	for (int i = relist.length-1; i >=0 ; i--) {
 			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
 				%>
 			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="100"> 
-				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
-				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 70px; max-heigt:70px; width: auto; height: auto; margin: 0 0 0 25px;">
-				<% } %>
+					<% if (recipeInfo[4] == null) { 
+					if (userID != null && userMode.equals("1")) { %>
+						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+						<% }
+						else { %>
+						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+					<% } }
+					else {
+						if (userID != null && userMode.equals("1")) { %>
+							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+							</div> <% }
+						else { %>
+						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+						<% } } %>
 				<br><%= recipeInfo[0] %>
 			</div>
 		<%

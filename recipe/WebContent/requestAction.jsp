@@ -7,9 +7,10 @@
 <meta charset="EUC-KR">
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
+<%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>모아모아 레시피</title>
 <script type="text/javascript">
 	var g_oInterval = null;
 	function openFile() {
@@ -60,7 +61,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('레시피 이름과 카테고리, 조리 방법은 꼭 입력해주셔야 합니다.')");
+		script.println("alert('레시피 이름과 카테고리, 조리 방법은 꼭 입력해주셔야 합니다!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
@@ -98,7 +99,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('데이터베이스 오류')");
+		script.println("alert('데이터베이스에 오류가 발생했습니다!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
@@ -112,11 +113,40 @@
 	}
 	else {
 		session.setAttribute("newNum", Integer.toString(result));
+	
+	UserDAO userDAO = new UserDAO();
+	String[] personal = userDAO.personal(userID);
  %>
- 		<h3>레시피의 사진도 등록해주세요!</h3>
+ 	<div id="container">
+		<div id="navi">
+		<div id = "title">
+				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+		</div>
+			<ul class="h">
+		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
+         <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
+         <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
+         <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
+         <div id="menubar">
+               <ul class="h">
+                  <li class="l">
+                  <a class="h" href="#"><img src="<%=personal[2]%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                     <ul class="h">
+                     	<li class="l"><a class="ha" href="logoutAction.jsp">로그아웃</a></li> 
+                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                  
+                     </ul>
+                  </li>
+               </ul></div>
+			</ul>
+		</div>
+	</div>
+		<section><br>
+	<div id = "reque">
+ 		<h3>(´▽`)<br>레시피의 사진도 등록해주세요!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
 		<br><br>
 		<a href="#" onclick="openFile(); return false;">레시피 사진 변경</a>
+		</div></section>
  <% } %>
 </body>
 </html>

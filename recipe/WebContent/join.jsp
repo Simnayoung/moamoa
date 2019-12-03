@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <link href="css/style.css" rel="stylesheet" type="text/css">
 <link href="css/renacss.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 	<div id="container">

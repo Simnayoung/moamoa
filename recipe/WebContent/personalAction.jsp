@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" charset="text/html; charset=UTF-8">
-<title>Hello World</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 	<%
@@ -18,9 +18,14 @@
 		}
 		String userPassword = request.getParameter("userPassword");
 		String userName = request.getParameter("userName");
+		String userMode = request.getParameter("diet");
 	
 		UserDAO userDAO = new UserDAO();
-		int result = userDAO.rename(userID, userPassword, userName);
+		int result = 0;
+		if (userMode.equals("off"))
+			result = userDAO.rename(userID, userPassword, userName, "0");
+		else if (userMode.equals("on"))
+			result = userDAO.rename(userID, userPassword, userName, "1");	
 		
 		if(result == 1)
 		{
@@ -28,13 +33,22 @@
 			session.setAttribute("userName", personal[1]);
 			session.setAttribute("userProfile", personal[2]);
 			
+			if (userMode.equals("off"))
+				session.setAttribute("diet", "0");
+			else if (userMode.equals("on"))
+				session.setAttribute("diet", "1");
+			PrintWriter script = response.getWriter();
+			script.println("<script>");
+			script.println("alert('수정이 완료되었습니다!')");
+			script.println("</script>");
+			
 			response.sendRedirect("rename.jsp");
 		}
 		else if(result == 0)
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('오류! 다시 시도해주세요.')");
+			script.println("alert('오류가 발생했습니다!')");
 			script.println("history.back()");
 			script.println("</script>");
 		}

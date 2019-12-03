@@ -9,7 +9,7 @@
 <%@ page import="content.ContentDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>모아모아 레시피</title>
 </head>
 <body>
 	<%
@@ -29,7 +29,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('입력되지 않은 사항이 있습니다.')");
+		script.println("alert('입력되지 않은 사항이 있습니다!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
@@ -41,7 +41,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('수정 완료!')");
+		script.println("alert('수정이 완료되었습니다!')");
 		script.println("window.close()");
 		script.println("opener.location.reload()");
 		script.println("</script>");
@@ -50,7 +50,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('데이터베이스 오류가 발생했습니다.')");
+		script.println("alert('데이터베이스 오류가 발생했습니다!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}

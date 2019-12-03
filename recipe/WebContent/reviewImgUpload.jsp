@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>모아모아 레시피</title>
 </head>
 <body>
 		<form method="post" action="reviewImgAction.jsp" enctype="multipart/form-data">		

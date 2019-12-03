@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>Upload</title>
 </head>
 <body>
 		<form method="post" action="imgAction.jsp" enctype="multipart/form-data">		
