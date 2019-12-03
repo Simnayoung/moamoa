@@ -11,7 +11,7 @@
 <title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank","width=410, height=400, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank","width=500, height=400, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -111,7 +111,12 @@
 			</ul>
 		</div>
 	</div>
-		<section><br><div id="recipeSection">
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
+	<section>
+	<%} %>
+	<br><div id="recipeSection">
 			<% for(int i = 0; i<recipeList.length ; i++) {%>
 				<hr size="1" width="700"> 
 				<div id="recipeContent" onclick="openInfoForm(<%=recipeList[i][0]%>);">

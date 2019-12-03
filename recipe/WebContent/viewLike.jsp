@@ -12,7 +12,7 @@
 <title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=425, height=700, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum, "_blank", "width=500, height=700, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -65,7 +65,12 @@
 			</ul>
 		</div>
 	</div>
-		<section><br><div id = "recipeSection">
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
+	<section>
+	<%} %>
+		<br><div id = "recipeSection">
 		<a href="viewLike.jsp?choice=0">[전체 보기]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=1">[발도장찍은 레시피]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=2">[후기 남긴 레시피]</a>
 			<% if (choice.equals("0")) { 
 				String[] checkR = null;

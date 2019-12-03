@@ -73,7 +73,8 @@
 			</ul>
 		</div>
 	</div>
-		<section><br>
+	<section>
+	<br>
 		<div id = "ques">
 			<h3>질문 남기기</h3>
 				<form method="post" action="questAction.jsp?number=<%=questList.length+1%>">

@@ -104,8 +104,18 @@
 			</td>
 		</tr>
 		<% if (likeInfo != null) { %><tr>
-			<th class = "heart"><img src="<%=likeInfo%>" onclick="changeImage(<%=recipeDAO.recipeLike(recipeNumber, userID, 1)%>)" style="width: 50%; height: auto; cursor: pointer;" id="imgInfo"></th>
-			<th class = "heart" align="left"><%=recipeDAO.recipeLikeNum(recipeNumber) %>&nbsp;명의 사람이 발자국을 남겼습니다</th>
+			<%if (userID != null && userMode.equals("1")) { %>
+			<th class = "heart" style = "background-color:rgb(141,169,241);">
+			<% }else { %>
+			<th class = "heart">
+			<%} %>
+			<img src="<%=likeInfo%>" onclick="changeImage(<%=recipeDAO.recipeLike(recipeNumber, userID, 1)%>)" style="width: 50%; height: auto; cursor: pointer;" id="imgInfo"></th>
+			<%if (userID != null && userMode.equals("1")) { %>
+			<th class = "heart" align = "left" style = "background-color:rgb(141,169,241);">
+			<% }else { %>
+			<th class = "heart" align = "left">
+			<%} %>
+			<%=recipeDAO.recipeLikeNum(recipeNumber) %>&nbsp;명의 사람이 발자국을 남겼습니다</th>
 		</tr><% } %>
 		<tr>
 			<th valign ="top">재료</th>
@@ -121,7 +131,11 @@
 		</tr>
 		</table>
 		<br>
+		<%if (userID != null && userMode.equals("1")) { %>
+		<table id = "reviewt" style = "background-color:rgb(141,169,241);">
+		<% }else { %>
 		<table id = "reviewt">
+		<%} %>
 		<% for (int i = 0; i<reviewInfo.length; i++) { %>
 		<tr>
 			<th>작성자<br> <b><%= reviewInfo[i][3] %></b>

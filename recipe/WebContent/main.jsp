@@ -11,7 +11,7 @@
 <title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank", "width=425, height=700, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank", "width=500, height=700, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
@@ -85,7 +85,12 @@
 			</ul>
 		</div>
 	</div>
-	<section><br>
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
+	<section>
+	<%} %>
+	<br>
 		<div id="category">
 			<ul class="c">
 				<li class="c"><a href="submain.jsp?category=korean"><img src="/recipe/cateImg/korean.jpg"><br>한식</a></li>
@@ -115,11 +120,11 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
-							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100%; border-radius:10px;"></div>
+							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto; border-radius:10px;">
 							</div> <% }
 						else { %>
-						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto; border-radius:10px;">
 						<% } } %>
 					</th>
 					<td style="padding-left:20px;">

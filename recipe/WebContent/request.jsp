@@ -16,10 +16,12 @@
 	String userID = null;
 	String userName = null;
 	String userProfile = null;
+	String userMode = null;
 	if(session.getAttribute("userID") != null){
 	  userID = (String) session.getAttribute("userID");
 	  userName = (String) session.getAttribute("userName");
 	  userProfile = (String) session.getAttribute("userProfile");
+	  userMode = (String) session.getAttribute("diet");
 	  }
 	else if (userID == null)
 	{
@@ -53,7 +55,12 @@
 			</ul>
 		</div>
 	</div>
-	<section><br>
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
+	<section>
+	<%} %>
+	<br>
 	<div id = "reque">
 		<h3>(❁´▽`❁)<br>여러분의 소중한 레시피를 공유해주세요!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
