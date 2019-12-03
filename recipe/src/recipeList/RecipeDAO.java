@@ -50,15 +50,16 @@ public class RecipeDAO
 		return 0;
 	}
 	
-	public String[][] listing(String[] searchList)
+	public String[][] listing(String[] searchList, String pageNumber)
 	{
 		String SQL = "SELECT number, name, cookware FROM recipe";
-		
 		try
 		{
 			if (searchList == null) {
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery(SQL);
+				SQL += " ORDER BY number ASC LIMIT ?, 10";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, Integer.parseInt(pageNumber)*10);
+				rs = pstmt.executeQuery();
 				
 				rs.last();
 				int rowCount = rs.getRow();
@@ -98,8 +99,10 @@ public class RecipeDAO
 					else 
 						SQL += searchList[i] + " = 1 AND ";
 				}
-				stmt = conn.createStatement();
-				rs = stmt.executeQuery(SQL);
+				SQL += " ORDER BY number ASC LIMIT ?, 10";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, Integer.parseInt(pageNumber)*10);
+				rs = pstmt.executeQuery();
 				
 				rs.last();
 				int rowCount = rs.getRow();
@@ -584,4 +587,21 @@ public class RecipeDAO
 				return 0;
 			}
 		}
+	
+	public boolean nextPage (String pageNumber)
+	{
+		try {
+			String SQL = "SELECT number FROM recipe ORDER BY number ASC LIMIT ?, 1";
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, (Integer.parseInt(pageNumber)+1)*10);
+				pstmt.executeQuery();
+				
+				return true;
+			}
+			catch(Exception e)
+			{
+				e.printStackTrace();
+				return false;
+			}
+	}
 }

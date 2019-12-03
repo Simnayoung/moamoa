@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" charset="text/html; charset=UTF-8">
-<title>✿모아모아 레시피✿</title>
+<title>모아모아 레시피</title>
 </head>
 <body>
 	<%
@@ -23,7 +23,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('( ⁰▱⁰ )!!!\n이미 로그인이 되어있습니다!')");
+			script.println("alert('이미 로그인이 되어있습니다!')");
 			script.println("location.href = 'main.jsp'");
 			script.println("</script>");
 		}

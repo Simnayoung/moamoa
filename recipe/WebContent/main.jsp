@@ -18,8 +18,11 @@
 <body>
    <%
 	String[] searchList = null;
+   	String pageNum = request.getParameter("pageNum");
+   	if (pageNum == null)
+   		pageNum = "0";
 	RecipeDAO recipeDAO = new RecipeDAO();
-	String[][] recipeList = recipeDAO.listing(searchList);
+	String[][] recipeList = recipeDAO.listing(searchList, pageNum);
 	
     String userID = null;
     String userName = null;
@@ -38,7 +41,7 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp?pageNum=0"><img src="/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
  		<%
@@ -88,15 +91,15 @@
 	<section><br>
 		<div id="category">
 			<ul class="c">
-				<li class="c"><a href="submain.jsp?category=korean"><img src="/recipe/cateImg/korean.jpg"><br>한식</a></li>
-				<li class="c"><a href="submain.jsp?category=chinese"><img src="/recipe/cateImg/chinese.jpg"><br>중식</a></li>
-				<li class="c"><a href="submain.jsp?category=japenese"><img src="/recipe/cateImg/japanese.jpg"><br>일식</a></li>
-				<li class="c"><a href="submain.jsp?category=western"><img src="/recipe/cateImg/western.jpg"><br>양식</a></li>
-				<li class="c"><a href="submain.jsp?category=school"><img src="/recipe/cateImg/tt.jpg"><br>분식</a></li>
-				<li class="c"><a href="submain.jsp?category=fast"><img src="/recipe/cateImg/fast.jpg"><br>패스트푸드</a></li>
-				<li class="c"><a href="submain.jsp?category=dessert"><img src="/recipe/cateImg/dessert.jpg"><br>디저트</a></li>
-				<li class="c"><a href="submain.jsp?category=easy"><img src="/recipe/cateImg/simple.jpg"><br>간편식</a></li>
-				<li class="c"><a href="submain.jsp?category=other"><img src="/recipe/cateImg/etc.png"><br>기타</a></li>
+				<li class="c"><a href="submain.jsp?category=korean&pageNum=0"><img src="/recipe/cateImg/korean.jpg"><br>한식</a></li>
+				<li class="c"><a href="submain.jsp?category=chinese&pageNum=0"><img src="/recipe/cateImg/chinese.jpg"><br>중식</a></li>
+				<li class="c"><a href="submain.jsp?category=japenese&pageNum=0"><img src="/recipe/cateImg/japanese.jpg"><br>일식</a></li>
+				<li class="c"><a href="submain.jsp?category=western&pageNum=0"><img src="/recipe/cateImg/western.jpg"><br>양식</a></li>
+				<li class="c"><a href="submain.jsp?category=school&pageNum=0"><img src="/recipe/cateImg/tt.jpg"><br>분식</a></li>
+				<li class="c"><a href="submain.jsp?category=fast&pageNum=0"><img src="/recipe/cateImg/fast.jpg"><br>패스트푸드</a></li>
+				<li class="c"><a href="submain.jsp?category=dessert&pageNum=0"><img src="/recipe/cateImg/dessert.jpg"><br>디저트</a></li>
+				<li class="c"><a href="submain.jsp?category=easy&pageNum=0"><img src="/recipe/cateImg/simple.jpg"><br>간편식</a></li>
+				<li class="c"><a href="submain.jsp?category=other&pageNum=0"><img src="/recipe/cateImg/etc.png"><br>기타</a></li>
 			</ul>
 		</div>
 		<div id="recipeSection">
@@ -131,6 +134,12 @@
 				</div>
 			<% } %>
 			<hr size="1" width="700"> 
+			<%if (!pageNum.equals("0")) { %>
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)-1%>">이전</a>&nbsp;|&nbsp;
+			<% } %>
+			<%if (recipeDAO.nextPage(pageNum)) { %>
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)+1%>">다음</a>
+			<% } %>
 		</div></section>
 		<%
 		Cookie[] ck = request.getCookies();
@@ -142,6 +151,7 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
 			if (len > 4) {
@@ -191,7 +201,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

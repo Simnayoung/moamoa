@@ -45,7 +45,7 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp?pageNum=0"><img src="/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
@@ -236,6 +236,7 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
 			if (len > 4) {
@@ -285,7 +286,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

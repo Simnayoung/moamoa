@@ -21,8 +21,11 @@
 	session.setAttribute("category", category);
 	
 	String[] searchList = {category};
+   	String pageNum = request.getParameter("pageNum");
+   	if (pageNum == null)
+   		pageNum = "0";
 	RecipeDAO recipeDAO = new RecipeDAO();
-	String[][] recipeList = recipeDAO.listing(searchList);
+	String[][] recipeList = recipeDAO.listing(searchList, pageNum);
 	
     String userID = null;
     String userName = null;
@@ -39,7 +42,7 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp?pageNum=0"><img src="/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
  		<%
@@ -88,7 +91,7 @@
 	</div>
 	<section><br>
 		<div id="category">
-			<table><form method="post" action="listmain.jsp">
+			<table><form method="post" action="listmain.jsp?pageNum=0">
 				<tr>
 					<th rowspan="2" align="center" width=100px>카테고리</th>
 					<td align="center" width=100px>재료</td>
@@ -156,6 +159,12 @@
 			<hr size="1" width="700"> <h3>Σ(￣□￣;)<br>레시피가 없습니다!<br>여러분의 레시피를 공유해주세요!<br><a href="request.jsp">레시피 공유하러 가기</a></h3>
 			<% } %>
 			<hr size="1" width="700"> 
+			<%if (!pageNum.equals("0")) { %>
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)-1%>">이전</a>&nbsp;|&nbsp;
+			<% } %>
+			<%if (recipeDAO.nextPage(pageNum)) { %>
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)+1%>">다음</a>
+			<% } %>
 		</div><br></section>
 		<%
 		Cookie[] ck = request.getCookies();
@@ -167,6 +176,7 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
 			if (len > 4) {
@@ -216,7 +226,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

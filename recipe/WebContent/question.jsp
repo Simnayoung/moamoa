@@ -125,6 +125,7 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
 			if (len > 4) {
@@ -174,7 +175,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
