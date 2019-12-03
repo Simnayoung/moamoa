@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>âœ¿ëª¨ì•„ëª¨ì•„ ë ˆì‹œí”¼âœ¿</title>
+<title>¸ð¾Æ¸ð¾Æ ·¹½ÃÇÇ</title>
 </head>
 <body>
 		<form method="post" action="recipeimgAction.jsp" enctype="multipart/form-data">		
 			<input type="file" name="profile"><br>							
-			<input type="submit" value="ì‚¬ì§„ ë³€ê²½">
+			<input type="submit" value="»çÁø º¯°æ">
 		</form>
 </body>
 </html>

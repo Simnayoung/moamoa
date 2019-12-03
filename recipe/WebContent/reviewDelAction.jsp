@@ -9,7 +9,7 @@
 <%@ page import="recipeList.RecipeDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>âœ¿ëª¨ì•„ëª¨ì•„ ë ˆì‹œí”¼âœ¿</title>
+<title>¸ğ¾Æ¸ğ¾Æ ·¹½ÃÇÇ</title>
 </head>
 <body>
 <%
@@ -28,7 +28,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ì‚­ì œê°€ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤!')");
+		script.println("alert('»èÁ¦°¡ ¿Ï·áµÇ¾ú½À´Ï´Ù!')");
 		script.println("window.location = document.referrer");
 		script.println("</script>");
 	}
@@ -36,7 +36,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤!')");
+		script.println("alert('µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}

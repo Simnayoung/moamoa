@@ -25,13 +25,14 @@
 		if (userMode.equals("off"))
 			result = userDAO.rename(userID, userPassword, userName, "0");
 		else if (userMode.equals("on"))
-			result = userDAO.rename(userID, userPassword, userName, "1");		
+			result = userDAO.rename(userID, userPassword, userName, "1");	
 		
 		if(result == 1)
 		{
 			String[] personal = userDAO.personal(userID);
 			session.setAttribute("userName", personal[1]);
 			session.setAttribute("userProfile", personal[2]);
+			
 			if (userMode.equals("off"))
 				session.setAttribute("diet", "0");
 			else if (userMode.equals("on"))
@@ -40,6 +41,7 @@
 			script.println("<script>");
 			script.println("alert('수정이 완료되었습니다!')");
 			script.println("</script>");
+			
 			response.sendRedirect("rename.jsp");
 		}
 		else if(result == 0)

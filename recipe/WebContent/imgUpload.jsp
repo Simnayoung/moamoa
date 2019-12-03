@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>이미지 업로드</title>
+<title>Upload</title>
 </head>
 <body>
 		<form method="post" action="imgAction.jsp" enctype="multipart/form-data">		

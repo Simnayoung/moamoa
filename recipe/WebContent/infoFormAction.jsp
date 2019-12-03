@@ -8,6 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
+<link href="css/table.css" rel="stylesheet" type="text/css">
 <title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	var g_oInterval = null;
@@ -76,56 +77,60 @@
 		httpRequest.send(null);
 	}
 	</script>
-	<table>
+		<table id = "recipet">
 		<tr>
 			<th>이름</th>
-			<td align="center" width=300px><%= recipeInfo[0] %></td>
+			<td align="center" width=400px><%= recipeInfo[0] %></td>
 		</tr>
 		<tr>
 			<th></th>
-			<td align="center">
-					<% if (recipeInfo[4] == null) { 
+			<td id = "recipe_img" align="center">
+				<% if (recipeInfo[4] == null) { 
 					if (userID != null && userMode.equals("1")) { %>
-						<img src="/recipe/cateImg/dietfood.png" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
+						<img src="/recipe/cateImg/dietfood.png" style="display: block; max-width: 400px; max-heigt:400px; width: auto; height: auto;">
 						<% }
 						else { %>
-						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
+						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 400px; max-heigt:400px; width: auto; height: auto;">
 					<% } }
 					else {
 						if (userID != null && userMode.equals("1")) { %>
-							<div class="container-fulid" style="max-width: 300px; max-heigt:300px; width: auto; height: auto; position:relative">
+							<div class="container-fulid" style="max-width: 400px; max-heigt:400px; width: auto; height: auto; position:relative">
 							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
-							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
+							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 400px; max-heigt:400px; width: auto; height: auto;">
 							</div> <% }
 						else { %>
-						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
-						<% } } %>
+						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 400px; max-heigt:400px; width: auto; height: auto;">
+					<% } } %>
 			</td>
 		</tr>
+		<% if (likeInfo != null) { %><tr>
+			<th class = "heart"><img src="<%=likeInfo%>" onclick="changeImage(<%=recipeDAO.recipeLike(recipeNumber, userID, 1)%>)" style="width: 50%; height: auto; cursor: pointer;" id="imgInfo"></th>
+			<th class = "heart" align="left"><%=recipeDAO.recipeLikeNum(recipeNumber) %>&nbsp;명의 사람이 발자국을 남겼습니다</th>
+		</tr><% } %>
 		<tr>
-			<th>재료</th>
-			<td align="center" width=300px><%= recipeInfo[3] %></td>
+			<th valign ="top">재료</th>
+			<td width=400px><%= recipeInfo[3] %></td>
 		</tr>
 		<tr>
 			<th>조리도구</th>
-			<td align="center" width=300px><%= recipeInfo[1] %></td>
+			<td width=400px><%= recipeInfo[1] %></td>
 		</tr>
 		<tr>
-			<th>방법</th>
-			<td align="center" width=300px><%= recipeInfo[2] %></td>
+			<th valign ="top">방법</th>
+			<td width =400px><%= recipeInfo[2] %></td>
 		</tr>
-		<% if (likeInfo != null) { %><tr>
-			<th colspan="2"><br><img src="<%=likeInfo%>" onclick="changeImage(<%=recipeDAO.recipeLike(recipeNumber, userID, 1)%>)" style="width: 10%; height: auto; cursor: pointer;" id="imgInfo"></th>
-		</tr><% } %>
+		</table>
+		<br>
+		<table id = "reviewt">
 		<% for (int i = 0; i<reviewInfo.length; i++) { %>
 		<tr>
-			<th>작성자 : <b><%= reviewInfo[i][3] %></b>
+			<th>작성자<br> <b><%= reviewInfo[i][3] %></b>
 				<% if (reviewInfo[i][0].equals(userID)) {%>
-				<br><a href="#" onclick="openModiForm(<%=recipeNumber%>); return false;">[수정]</a>&nbsp;|&nbsp;
+				<br><a href="#" onclick="openModiForm(<%=recipeNumber%>); return false;">[수정]</a><br>
 				<a href="reviewDelAction.jsp?number=<%=recipeNumber%>">[삭제]</a><br>
 				<% } else {}%>
 			</th>
-			<td width=300px>
+			<td id = "reviewc" width=400px>
 				<% if (reviewInfo[i][2] != null) { 
 					if (userID != null && userMode.equals("1")) { %>
 						<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
@@ -136,18 +141,18 @@
 						else { %>
 						<img src="<%=reviewInfo[i][2]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
 					<% } } %>
-			<br><%= reviewInfo[i][1] %></td>
+			<%= reviewInfo[i][1] %></td>
 		</tr>
 		<% } %>
 		<% if (userID != null) { %><tr>
-			<th>후기 쓰기</th>
-			<td align="center" width=300px>
+			<th class = "nop" width = 100px>후기 쓰기</th>
+			<td class = "nop" align="center" width=400px>
 				<% if (userReview != null) { %>
 				<img src="<%=userReview%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
 				<% } %>
-				<a href="#" onclick="openFile(); return false;">사진 변경</a>
+				<a href="#" onclick="openFile(); return false;">사진 변경</a><br>
 				<form method="post" action="reviewFormAction.jsp?number=<%=recipeNumber%>">
-					<textarea rows="10" cols="40" name="reviewContent"></textarea><br><br>
+					<textarea rows="10" cols="40" name="reviewContent"></textarea><br>
 				<input type="submit" value="등록"></form>
 			</td>
 		</tr>
