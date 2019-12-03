@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" charset="text/html; charset=UTF-8">
-<title>✿모아모아 레시피✿</title>
+<title>Hello World</title>
 </head>
 <body>
 	<%
@@ -32,7 +32,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('(๑•̀ㅂ•́)و'\n등록이 완료되었습니다!')");
+			script.println("alert('등록완료!')");
 			script.println("window.location = document.referrer");
 			session.setAttribute("userReview", null);
 			script.println("</script>");
@@ -41,7 +41,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('( ⁰▱⁰ )!!!\n오류가 발생했습니다!')");
+			script.println("alert('오류! 다시 시도해주세요.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}
@@ -49,7 +49,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('(❁´▽`❁)\n이미 후기가 등록되어 있습니다!')");
+			script.println("alert('이미 후기가 등록되어 있습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}

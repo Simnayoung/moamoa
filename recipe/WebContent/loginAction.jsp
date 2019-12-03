@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" charset="text/html; charset=UTF-8">
-<title>✿모아모아 레시피✿</title>
+<title>Hello World</title>
 </head>
 <body>
 	<%
@@ -23,7 +23,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('( ⁰▱⁰ )!!!\n이미 로그인이 되어있습니다!')");
+			script.println("alert('이미 로그인이 되어있습니다.')");
 			script.println("location.href = 'main.jsp'");
 			script.println("</script>");
 		}
@@ -37,7 +37,6 @@
 			session.setAttribute("userID", user.getUserID());
 			session.setAttribute("userName", personal[1]);
 			session.setAttribute("userProfile", personal[2]);
-			session.setAttribute("diet", personal[3]);
 			
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
@@ -48,7 +47,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('( ⁰▱⁰ )!!!\n비밀번호가 틀립니다!')");
+			script.println("alert('비밀번호가 틀립니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}
@@ -56,7 +55,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('( ⁰▱⁰ )!!!\n존재하지 않는 아이디입니다!')");
+			script.println("alert('존재하지 않는 아이디입니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}
@@ -64,7 +63,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('( ⁰▱⁰ )!!!\n데이터베이스 오류가 발생했습니다!')");
+			script.println("alert('데이터베이스 오류가 발생했습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}

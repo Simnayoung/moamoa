@@ -8,7 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>✿모아모아 레시피✿</title>
+<title>Insert title here</title>
 <script type="text/javascript">
 	var g_oInterval = null;
 	function openFile() {

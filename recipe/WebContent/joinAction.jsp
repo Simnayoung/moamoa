@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" charset="text/html; charset=UTF-8">
-<title>✿모아모아 레시피✿</title>
+<title>Hello World</title>
 </head>
 <body>
 	<%	
@@ -25,7 +25,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('(≧∇≦)b\n이미 로그인이 되어있습니다!')");
+			script.println("alert('이미 로그인이 되어있습니다.')");
 			script.println("location.href = 'main.jsp'");
 			script.println("</script>");
 		}
@@ -38,7 +38,7 @@
 		{
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
-			script.println("alert('( ⁰▱⁰ )!!!\n입력되지 않은 사항이 있습니다!')");
+			script.println("alert('입력되지 않은 사항이 있습니다.')");
 			script.println("history.back()");
 			script.println("</script>");
 		}
@@ -52,7 +52,7 @@
 			{
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("alert('( ⁰▱⁰ )!!!\n이미 존재하는 아이디입니다!')");
+				script.println("alert('이미 존재하는 아이디입니다.')");
 				script.println("history.back()");
 				script.println("</script>");
 			}
@@ -68,7 +68,7 @@
 			{
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("alert('( ⁰▱⁰ )!!!\n이미 존재하는 닉네임입니다!')");
+				script.println("alert('이미 존재하는 닉네임입니다.')");
 				script.println("history.back()");
 				script.println("</script>");
 			}
@@ -80,7 +80,6 @@
 				
 				PrintWriter script = response.getWriter();
 				script.println("<script>");
-				script.println("alert('(๑•̀ㅂ•́)و'\n가입완료!\n환영합니다!')");
 				response.sendRedirect((String)session.getAttribute("prev"));
 				script.println("</script>");
 			}
