@@ -9,7 +9,7 @@
 <%@ page import="content.ContentDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>âœ¿ëª¨ì•„ëª¨ì•„ ë ˆì‹œí”¼âœ¿</title>
 </head>
 <body>
 	<%
@@ -29,7 +29,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ÀÔ·ÂµÇÁö ¾ÊÀº »çÇ×ÀÌ ÀÖ½À´Ï´Ù.')");
+		script.println("alert('( â°â–±â° )!!!\nì…ë ¥ë˜ì§€ ì•Šì€ ì‚¬í•­ì´ ìˆìŠµë‹ˆë‹¤!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
@@ -41,7 +41,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('¼öÁ¤ ¿Ï·á!')");
+		script.println("alert('(à¹‘â€¢Ì€ã…‚â€¢Ì)Ùˆ'\nìˆ˜ì •ì´ ì™„ë£Œë˜ì—ˆìŠµë‹ˆë‹¤!')");
 		script.println("window.close()");
 		script.println("opener.location.reload()");
 		script.println("</script>");
@@ -50,7 +50,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù°¡ ¹ß»ıÇß½À´Ï´Ù.')");
+		script.println("alert('( â°â–±â° )!!!\në°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}

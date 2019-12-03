@@ -23,7 +23,7 @@
 	    }, 500);
 	};
 </script>
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 <%
@@ -37,7 +37,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요한 서비스입니다.')");
+		script.println("alert('( ⁰▱⁰ )!!!\n로그인이 필요한 서비스입니다!')");
 		script.println("location.href = 'main.jsp'");
 		script.println("</script>");
 	}
@@ -69,9 +69,17 @@
 		<br>
 		<a href="#" onclick="openFile(); return false;">프로필 사진 변경</a>	
 		<form method="post" action="personalAction.jsp">
-			비밀번호 : <input type="text" placeholder="<%= personal[0] %>" name="userPassword" maxlength="20"><br>				
-			닉네임 : <input type="password" placeholder="<%= personal[1] %>" name="userName" maxlength="20"><br>				
-			<input type="submit" value="정보수정">
+			닉네임 : <input type="text" placeholder="<%= personal[1] %>" name="userName" maxlength="20"><br>	
+			비밀번호 : <input type="password" placeholder="<%= personal[0] %>" name="userPassword" maxlength="20"><br>			
+			다이어트 모드 : <%if (personal[3].equals("0")) {%>
+			<input type="radio" name="diet" value="off" checked="checked">OFF&nbsp;&nbsp;
+			<input type="radio" name="diet" value="on">ON
+			<% }
+			else if (personal[3].equals("1")) {%>
+			<input type="radio" name="diet" value="off">OFF&nbsp;
+			<input type="radio" name="diet" value="on" checked="checked">ON
+			<% } %>
+			<br><input type="submit" value="정보수정">
 		</form>
 	</section>
 	<div id="footer">

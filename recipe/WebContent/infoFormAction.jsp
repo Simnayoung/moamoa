@@ -8,7 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	var g_oInterval = null;
 	function openFile() {
@@ -42,9 +42,11 @@
 	String userID = null;
 	String likeInfo = null;
 	String userReview = null;
+	String userMode = null;
 	
 	if(session.getAttribute("userID") != null) {
 		userID = (String) session.getAttribute("userID");
+		userMode = (String) session.getAttribute("diet");
 		if (recipeDAO.recipeLike(recipeNumber, userID, 1) != 0 ) {
 			likeInfo = "/recipe/cateImg/like.png";
 		}
@@ -54,9 +56,6 @@
 	
 	if(session.getAttribute("userReview") != null)
 		userReview = (String) session.getAttribute("userReview");
-	
-	if (recipeInfo[4] == null)
-		recipeInfo[4] = "/recipe/cateImg/food.png";
 	%>
 	<script type="text/javascript">
 	function changeImage(num) {
@@ -84,7 +83,24 @@
 		</tr>
 		<tr>
 			<th></th>
-			<td align="center"><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;"></td>
+			<td align="center">
+					<% if (recipeInfo[4] == null) { 
+					if (userID != null && userMode.equals("1")) { %>
+						<img src="/recipe/cateImg/dietfood.png" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
+						<% }
+						else { %>
+						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
+					<% } }
+					else {
+						if (userID != null && userMode.equals("1")) { %>
+							<div class="container-fulid" style="max-width: 300px; max-heigt:300px; width: auto; height: auto; position:relative">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
+							</div> <% }
+						else { %>
+						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 300px; max-heigt:300px; width: auto; height: auto;">
+						<% } } %>
+			</td>
 		</tr>
 		<tr>
 			<th>재료</th>
@@ -109,9 +125,18 @@
 				<a href="reviewDelAction.jsp?number=<%=recipeNumber%>">[삭제]</a><br>
 				<% } else {}%>
 			</th>
-			<td width=300px><% if (reviewInfo[i][2] != null) {%>
-			<img src="<%=reviewInfo[i][2]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
-			<br><% } %><%= reviewInfo[i][1] %></td>
+			<td width=300px>
+				<% if (reviewInfo[i][2] != null) { 
+					if (userID != null && userMode.equals("1")) { %>
+						<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
+						<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+						<img src="<%=reviewInfo[i][2]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						</div>
+						<% }
+						else { %>
+						<img src="<%=reviewInfo[i][2]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+					<% } } %>
+			<br><%= reviewInfo[i][1] %></td>
 		</tr>
 		<% } %>
 		<% if (userID != null) { %><tr>

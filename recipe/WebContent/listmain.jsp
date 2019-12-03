@@ -8,7 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
 		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank","width=350, height=400, resizable=no, scrollbars=yes");
@@ -52,11 +52,13 @@
     String userID = null;
     String userName = null;
     String userProfile = null;
+    String userMode = null;
     if(session.getAttribute("userID") != null){
   	  userID = (String) session.getAttribute("userID");
   	  userName = (String) session.getAttribute("userName");
   	  userProfile = (String) session.getAttribute("userProfile");
-  	  }
+  	  userMode = (String) session.getAttribute("diet");  
+    }
 
 	session.setAttribute("prev", "submain.jsp?category="+category);
  %>
@@ -112,9 +114,22 @@
 				<div id="recipeContent" onclick="openInfoForm(<%=recipeList[i][0]%>);">
 					<table><tr>
 					<th>
-					<% if (recipeList[i][5] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
-					<% } else { %><img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
-					<% } %>
+					<% if (recipeList[i][5] == null) { 
+					if (userID != null && userMode.equals("1")) { %>
+						<img src="/recipe/cateImg/dietfood.png" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<% }
+						else { %>
+						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+					<% } }
+					else {
+						if (userID != null && userMode.equals("1")) { %>
+							<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+							</div> <% }
+						else { %>
+						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<% } } %>
 					</th>
 					<td>
 					&nbsp;<b><%=recipeList[i][1]%></b><br>
@@ -125,7 +140,7 @@
 				</div>
 			<% }
 			if (recipeList.length == 0) { %>
-			<hr size="1" width="700"> <h3>레시피가 없어요 ㅠ_ㅠ<br>여러분의 레시피를 공유해주세요!<br><a href="request.jsp">레시피 공유하러 가기</a></h3>
+			<hr size="1" width="700"> <h3>Σ(￣□￣;)<br>레시피가 없습니다!<br>여러분의 레시피를 공유해주세요!!<br><a href="request.jsp">레시피 공유하러 가기</a></h3>
 			<% } %>
 			<hr size="1" width="700"> 
 		</div></section>
@@ -159,9 +174,22 @@
 				%>
 			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="80"> 
-				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
-				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
-				<% } %>
+					<% if (recipeInfo[4] == null) { 
+					if (userID != null && userMode.equals("1")) { %>
+						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+						<% }
+						else { %>
+						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+					<% } }
+					else {
+						if (userID != null && userMode.equals("1")) { %>
+							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+							</div> <% }
+						else { %>
+						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+						<% } } %>
 				<br><%= recipeInfo[0] %>
 			</div>
 		<%

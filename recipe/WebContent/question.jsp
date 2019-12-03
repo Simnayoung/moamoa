@@ -10,7 +10,7 @@
 <%@ page import="recipeList.RecipeDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
 		window.open("questFormAction.jsp?questNum="+recipeNum, "_blank", "width=400, height=400, resizable=no, scrollbars=yes");
@@ -26,16 +26,18 @@
 	String userID = null;
 	String userName = null;
 	String userProfile = null;
+    String userMode = null;
 	if(session.getAttribute("userID") != null){
 	  userID = (String) session.getAttribute("userID");
 	  userName = (String) session.getAttribute("userName");
 	  userProfile = (String) session.getAttribute("userProfile");
-	  }
+	  userMode = (String) session.getAttribute("diet");
+	}
 	else if (userID == null)
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요한 서비스 입니다.')");
+		script.println("alert('( ⁰▱⁰ )!!!\n로그인이 필요한 서비스 입니다!')");
 		script.println("location.href = 'main.jsp'");
 		script.println("</script>");
 	}
@@ -51,7 +53,7 @@
 		<div id="navi">
 			<ul class="h">
 				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
-         <li class="h"><a class="h" href="viewLike.jsp">발도장</a></li>
+         <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
@@ -79,7 +81,7 @@
 				</form>
 				<% for(int i = questList.length-1; i>=0 ; i--) {%>
 				<hr size="1" width="700"> 
-				<div style="width: 840px; text-align: right;">
+				<div style="width: 800px; text-align: right;">
 				<% if (questList[i][0].equals(userID)) {%>
 				<a href="#" onclick="openModiForm(<%=questList[i][3]%>); return false;">[수정]</a>&nbsp;|&nbsp;
 				<a href="questDelAction.jsp?number=<%=questList[i][3]%>">[삭제]</a><br>
@@ -95,7 +97,7 @@
 			<% } }
 			else if (choice.equals("1")) { for(int i = questList.length-1; i>=0 ; i--) {%>
 				<hr size="1" width="700"> 
-				<div style="width: 850px; text-align: right;">
+				<div style="width: 810px; text-align: right;">
 				<a href="#" onclick="openModiForm(<%=questList[i][2]%>); return false;">[수정]</a><br>
 				</div>
 				<div id="recipeContent" onclick="openInfoForm(<%=questList[i][2]%>);">
@@ -137,9 +139,22 @@
 				%>
 			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="80"> 
-				<% if (recipeInfo[4] == null) { %><img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
-				<% } else { %><img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
-				<% } %>
+					<% if (recipeInfo[4] == null) { 
+					if (userID != null && userMode.equals("1")) { %>
+						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+						<% }
+						else { %>
+						<img src="/recipe/cateImg/food.png" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+					<% } }
+					else {
+						if (userID != null && userMode.equals("1")) { %>
+							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+							</div> <% }
+						else { %>
+						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+						<% } } %>
 				<br><%= recipeInfo[0] %>
 			</div>
 		<%

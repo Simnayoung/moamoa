@@ -94,14 +94,14 @@ public class UserDAO
 	
 	public String[] personal (String userID)
 	{
-		String SQL = "SELECT pw, name, profile FROM user WHERE id = ?";
+		String SQL = "SELECT pw, name, profile, diet FROM user WHERE id = ?";
 		
 		try
 			{
 				pstmt = conn.prepareStatement(SQL);
 				pstmt.setString(1, userID);
 				rs = pstmt.executeQuery();
-				String[] result = new String[3];
+				String[] result = new String[4];
 				
 				if(rs.next())
 				{
@@ -111,6 +111,7 @@ public class UserDAO
 						result[2] = "/recipe/userImg/member.png";
 					else
 						result[2] = rs.getString(3);
+					result[3] = Integer.toString(rs.getInt(4));
 				}
 				return result;
 			}
@@ -141,25 +142,39 @@ public class UserDAO
 			return 0;
 	}
 	
-	public int rename (String userID, String userPassword, String userName)
+	public int rename (String userID, String userPassword, String userName, String userMode)
 	{
-		String SQL = "UPDATE user SET profile = ? WHERE id = ?";
+		String SQL = "UPDATE user SET diet = ? WHERE id = ?";
 		
 		try
 			{
-				if (userPassword != null) {
+				pstmt = conn.prepareStatement(SQL);
+				pstmt.setInt(1, Integer.parseInt(userMode));
+				pstmt.setString(2, userID);
+				pstmt.executeUpdate();
+			
+				if (userPassword != null && userPassword.length() != 0) {
 					SQL = "UPDATE user SET pw = ? WHERE id = ?";
 					pstmt = conn.prepareStatement(SQL);
 					pstmt.setString(1, userPassword);
 					pstmt.setString(2, userID);
 					pstmt.executeUpdate();
 				}
-				if (userName != null) {
-					SQL = "UPDATE user SET name = ? WHERE id = ?";
-					pstmt = conn.prepareStatement(SQL);
-					pstmt.setString(1, userName);
-					pstmt.setString(2, userID);
-					pstmt.executeUpdate();
+				if (userName != null && userName.length() != 0 ) {
+					for (int i = 0; i<4; i++) {
+						if (i==0)
+							SQL = "UPDATE user SET name = ? WHERE id = ?";
+						else if (i==1)
+							SQL = "UPDATE question SET name = ? WHERE id = ?";
+						else if (i==2)
+							SQL = "UPDATE reply SET name = ? WHERE id = ?";
+						else if (i==3)
+							SQL = "UPDATE review SET name = ? WHERE id = ?";
+						pstmt = conn.prepareStatement(SQL);
+						pstmt.setString(1, userName);
+						pstmt.setString(2, userID);
+						pstmt.executeUpdate();
+					}
 				}
 
 				return 1;

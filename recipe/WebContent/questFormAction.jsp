@@ -8,7 +8,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="content.ContentDAO" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 	<%

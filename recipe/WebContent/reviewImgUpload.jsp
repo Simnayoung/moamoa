@@ -4,12 +4,12 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>Insert title here</title>
+<title>âœ¿ëª¨ì•„ëª¨ì•„ ë ˆì‹œí”¼âœ¿</title>
 </head>
 <body>
 		<form method="post" action="reviewImgAction.jsp" enctype="multipart/form-data">		
 			<input type="file" name="reviewImg"><br>							
-			<input type="submit" value="»çÁø º¯°æ">
+			<input type="submit" value="ì‚¬ì§„ ë³€ê²½">
 		</form>
 </body>
 </html>
