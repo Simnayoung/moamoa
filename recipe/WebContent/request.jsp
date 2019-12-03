@@ -8,8 +8,7 @@
 <head>
 <meta charset="UTF-8">
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/renacss.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 <%
@@ -25,37 +24,33 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요한 서비스 입니다.')");
+		script.println("alert('로그인이 필요한 서비스 입니다!')");
 		script.println("location.href = 'main.jsp'");
 		script.println("</script>");
 	}
 %>
 	<div id="container">
 		<div id="navi">
-		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
-		</div>
 			<ul class="h">
-		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
+				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=userProfile%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
-                     	<li class="l"><a class="ha" href="logoutAction.jsp">로그아웃</a></li> 
-                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                  
+                     	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
+                        <li class="l"><a class="h" href="rename.jsp">회원정보수정</a></li>                  
                      </ul>
                   </li>
                </ul></div>
 			</ul>
 		</div>
-	</div>
-	<section><br>
-	<div id = "reque">
-		<h3>여러분의 소중한 레시피를 공유해주세요!</h3>
+	</div><br>
+	<section>
+		<h3>(❁´▽`❁)<br>여러분의 소중한 레시피를 공유해주세요!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
 		<br><br>
 		<form method="post" action="requestAction.jsp">
@@ -114,15 +109,15 @@
 			<tr>
 			<th align="left">조리 순서</th>
 			<td><textarea rows="15" cols="80" name="recipeContent">
-1) 양파 자르기<br>
-2) 당근 자르기<br>
+1) 양파 자르기
+2) 당근 자르기
 3) 후라이팬에 볶기
 <-- 양식 꼭 지켜주세요! -->
 </textarea></td>	
 			</tr>
 		</table></div>
 			<input type="submit" value="레시피요청"><br><br>
-		</form></div>
+		</form>
 	</section>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

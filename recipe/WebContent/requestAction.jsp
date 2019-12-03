@@ -7,9 +7,10 @@
 <meta charset="EUC-KR">
 <%@ page import="java.util.*" %>
 <%@ page import="recipeList.RecipeDAO" %>
+<%@ page import="user.UserDAO" %>
 <%@ page import="java.io.PrintWriter" %>
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<title>Insert title here</title>
+<title>âœ¿ëª¨ì•„ëª¨ì•„ ë ˆì‹œí”¼âœ¿</title>
 <script type="text/javascript">
 	var g_oInterval = null;
 	function openFile() {
@@ -29,17 +30,17 @@
 <body>
 <%
 	HashMap<String, String> materialList = new HashMap<String, String>();
-	materialList.put("pork", "µÅÁö°í±â");	materialList.put("vegetable", "Ã¤¼Ò");
-	materialList.put("cow", "¼Ò°í±â");	materialList.put("milk", "¿ìÀ¯");
-	materialList.put("chicken", "´ß°í±â");	materialList.put("alchol", "¼ú");
-	materialList.put("rice", "¹ä");	materialList.put("jam", "Àë");
-	materialList.put("cheese", "Ä¡Áî");	materialList.put("ramen", "¶ó¸é");
-	materialList.put("egg", "°è¶õ");	materialList.put("snack", "°úÀÚ");
-	materialList.put("bread", "»§");	materialList.put("dressing", "µå·¹½Ì±â");
-	materialList.put("noodle", "¸é");	materialList.put("can", "ÅëÁ¶¸²");
-	materialList.put("fruit", "°úÀÏ");	materialList.put("microwave", "ÀüÀÚ·¹ÀÎÁö");
-	materialList.put("airfryer", "¿¡¾îÇÁ¶óÀÌ¾î");	materialList.put("oven", "¿ÀÇÂ");
-	materialList.put("fryingpan", "ÈÄ¶óÀÌÆÒ");	materialList.put("pot", "³¿ºñ");
+	materialList.put("pork", "ë¼ì§€ê³ ê¸°");	materialList.put("vegetable", "ì±„ì†Œ");
+	materialList.put("cow", "ì†Œê³ ê¸°");	materialList.put("milk", "ìš°ìœ ");
+	materialList.put("chicken", "ë‹­ê³ ê¸°");	materialList.put("alchol", "ìˆ ");
+	materialList.put("rice", "ë°¥");	materialList.put("jam", "ì¼");
+	materialList.put("cheese", "ì¹˜ì¦ˆ");	materialList.put("ramen", "ë¼ë©´");
+	materialList.put("egg", "ê³„ë€");	materialList.put("snack", "ê³¼ì");
+	materialList.put("bread", "ë¹µ");	materialList.put("dressing", "ë“œë ˆì‹±ê¸°");
+	materialList.put("noodle", "ë©´");	materialList.put("can", "í†µì¡°ë¦¼");
+	materialList.put("fruit", "ê³¼ì¼");	materialList.put("microwave", "ì „ìë ˆì¸ì§€");
+	materialList.put("airfryer", "ì—ì–´í”„ë¼ì´ì–´");	materialList.put("oven", "ì˜¤í”ˆ");
+	materialList.put("fryingpan", "í›„ë¼ì´íŒ¬");	materialList.put("pot", "ëƒ„ë¹„");
 
 	String userID = null;
 	String userName = null;
@@ -60,7 +61,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('·¹½ÃÇÇ ÀÌ¸§°ú Ä«Å×°í¸®, Á¶¸® ¹æ¹ıÀº ²À ÀÔ·ÂÇØÁÖ¼Å¾ß ÇÕ´Ï´Ù.')");
+		script.println("alert('ë ˆì‹œí”¼ ì´ë¦„ê³¼ ì¹´í…Œê³ ë¦¬, ì¡°ë¦¬ ë°©ë²•ì€ ê¼­ ì…ë ¥í•´ì£¼ì…”ì•¼ í•©ë‹ˆë‹¤!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
@@ -98,7 +99,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù')");
+		script.println("alert('ë°ì´í„°ë² ì´ìŠ¤ì— ì˜¤ë¥˜ê°€ ë°œìƒí–ˆìŠµë‹ˆë‹¤!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
@@ -106,17 +107,41 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('ÀÌ¹Ì Á¸ÀçÇÏ´Â ·¹½ÃÇÇÀÔ´Ï´Ù!')");
+		script.println("alert('ì´ë¯¸ ì¡´ì¬í•˜ëŠ” ë ˆì‹œí”¼ì…ë‹ˆë‹¤!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
 	else {
 		session.setAttribute("newNum", Integer.toString(result));
+		UserDAO userDAO = new UserDAO();
+		String[] personal = userDAO.personal(userID);
  %>
- 		<h3>·¹½ÃÇÇÀÇ »çÁøµµ µî·ÏÇØÁÖ¼¼¿ä!</h3>
+	<div id="container">
+		<div id="navi">
+			<ul class="h">
+				<li class="h"><a class="h active" href="main.jsp">ëª¨ì•„ëª¨ì•„ ë ˆì‹œí”¼</a></li>
+         <li class="h"><a class="h" href="viewLike.jsp?choice=0">ë°œë„ì¥</a></li>
+         <li class="h"><a class="h" href="question.jsp?choice=0">ë ˆì‹œí”¼Q&A</a></li>
+         <li class="h"><a class="h" href="request.jsp">ë ˆì‹œí”¼ìš”ì²­</a></li>
+         <div id="menubar">
+               <ul class="h">
+                  <li class="l">
+                  <a class="h" href="#"><img src="<%=personal[2]%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> ë‹˜</a>
+                     <ul class="h">
+                     	<li class="l"><a class="h" href="logoutAction.jsp">ë¡œê·¸ì•„ì›ƒ</a></li> 
+                        <li class="l"><a class="h" href="rename.jsp">ì •ë³´ìˆ˜ì •</a></li>                  
+                     </ul>
+                  </li>
+               </ul></div>
+			</ul>
+		</div>
+	</div><br>
+		<section>
+ 		<h3>(âÂ´â–½`â)<br>ë ˆì‹œí”¼ì˜ ì‚¬ì§„ë„ ë“±ë¡í•´ì£¼ì„¸ìš”!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
 		<br><br>
-		<a href="#" onclick="openFile(); return false;">·¹½ÃÇÇ »çÁø º¯°æ</a>
+		<a href="#" onclick="openFile(); return false;">ë ˆì‹œí”¼ ì‚¬ì§„ ë³€ê²½</a>
+		</section>
  <% } %>
 </body>
 </html>

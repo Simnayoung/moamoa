@@ -8,7 +8,6 @@
 <head>
 <meta charset="UTF-8">
 <link href="css/style.css" rel="stylesheet" type="text/css">
-<link href="css/renacss.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
 	var g_oInterval = null;
 	function openFile() {
@@ -24,7 +23,7 @@
 	    }, 500);
 	};
 </script>
-<title>Insert title here</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 <%
@@ -38,7 +37,7 @@
 	{
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요한 서비스입니다.')");
+		script.println("alert('( ⁰▱⁰ )!!!\n로그인이 필요한 서비스입니다!')");
 		script.println("location.href = 'main.jsp'");
 		script.println("</script>");
 	}
@@ -47,41 +46,43 @@
 %>
 	<div id="container">
 		<div id="navi">
-		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
-		</div>
 			<ul class="h">
-		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
+				<li class="h"><a class="h active" href="main.jsp">모아모아 레시피</a></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
                <ul class="h">
                   <li class="l">
-                  <a class="h" href="#"><img src="<%=personal[2]%>" style="width: 17px; height: 17px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
+                  <a class="h" href="#"><img src="<%=personal[2]%>" style="width: 30px; height: 30px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/><%=userName%> 님</a>
                      <ul class="h">
-                     	<li class="l"><a class="ha" href="logoutAction.jsp">로그아웃</a></li> 
-                        <li class="l"><a class="ha" href="rename.jsp">회원정보수정</a></li>                  
+                     	<li class="l"><a class="h" href="logoutAction.jsp">로그아웃</a></li> 
+                        <li class="l"><a class="h" href="rename.jsp">정보수정</a></li>                  
                      </ul>
                   </li>
                </ul></div>
 			</ul>
 		</div>
 	</div>
-	<section id = "renas">
-	<div id = "rena">
+	<section>
 		<img src="<%=personal[2]%>" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
 		<br>
 		<a href="#" onclick="openFile(); return false;">프로필 사진 변경</a>	
-		<div id = "pass">
 		<form method="post" action="personalAction.jsp">
-			비밀번호 : <input type="text" placeholder="<%= personal[0] %>" name="userPassword" maxlength="20" style = "width: 150px;"><br>				
-			&emsp;닉네임 : <input type="password" placeholder="<%= personal[1] %>" name="userName" maxlength="20" style = "width: 150px;"><br>				
-			<input type="submit" value="정보수정">
+			닉네임 : <input type="text" placeholder="<%= personal[1] %>" name="userName" maxlength="20"><br>	
+			비밀번호 : <input type="password" placeholder="<%= personal[0] %>" name="userPassword" maxlength="20"><br>			
+			다이어트 모드 : <%if (personal[3].equals("0")) {%>
+			<input type="radio" name="diet" value="off" checked="checked">OFF&nbsp;&nbsp;
+			<input type="radio" name="diet" value="on">ON
+			<% }
+			else if (personal[3].equals("1")) {%>
+			<input type="radio" name="diet" value="off">OFF&nbsp;
+			<input type="radio" name="diet" value="on" checked="checked">ON
+			<% } %>
+			<br><input type="submit" value="정보수정">
 		</form>
-		</div>
 	</section>
-	<div id="footer" style = "text-align : center;">
+	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지
 	</div>
 </body>

@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" charset="text/html; charset=UTF-8">
-<title>Hello World</title>
+<title>✿모아모아 레시피✿</title>
 </head>
 <body>
 	<%	
@@ -20,7 +20,7 @@
 	else {
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('로그인이 필요한 작업입니다!')");
+		script.println("alert('로그인이 필요한 서비스입니다!')");
 		script.println("window.close()");
 		script.println("</script>");
 	}
@@ -63,7 +63,7 @@
 
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('변경완료!')");
+		script.println("alert('변경이 완료되었습니다!')");
 		script.println("window.close()");
 		script.println("opener.parent.location.reload()");
 		script.println("</script>");
@@ -72,7 +72,7 @@
 		e.printStackTrace();
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('변경실패!')");
+		script.println("alert('변경을 실패했습니다!')");
 		script.println("history.back()");
 		script.println("</script>");
 	}
