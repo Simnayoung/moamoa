@@ -38,7 +38,7 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
  		<%
