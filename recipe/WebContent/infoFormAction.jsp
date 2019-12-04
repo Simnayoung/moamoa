@@ -72,7 +72,7 @@
 			}
 		}
 		
-		const url = '/recipe/recipeLike.jsp?' + "recipeNumber=" + <%=recipeNumber%> + "&type=" + (num == 1 ? "2" : "3");
+		const url = '/recipeLike.jsp?' + "recipeNumber=" + <%=recipeNumber%> + "&type=" + (num == 1 ? "2" : "3");
 		httpRequest.open('GET', url, true);
 		httpRequest.send(null);
 	}
