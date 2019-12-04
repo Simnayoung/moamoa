@@ -198,14 +198,15 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
-							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100%;border-radius:10px; "></div>
+							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;border-radius:10px;">
 							</div> <% }
 						else { %>
-						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
+						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;border-radius:10px;">
 						<% } } %>
-				<br><%= recipeInfo[0] %>
+				
 			</div>
+			<br><%= recipeInfo[0] %>
 		<%
 			} %>
 		<hr size="1" width="100"> 

@@ -49,7 +49,7 @@
 		</div>
 			<ul class="h">
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
-         <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
+         <li class="h"><a class="h" href="viewLike.jsp?choice=0"><font color ="rgb(255,197,19)">발도장</font></a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
@@ -94,11 +94,11 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
-							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100%;border-radius:10px;"></div>
+							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;border-radius:10px;">
 							</div> <% }
 						else { %>
-						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;border-radius:10px;">
 						<% } } %>
 					</th>
 					<td>
@@ -265,8 +265,9 @@
 		<%	for (int i = relist.length-1; i >=0 ; i--) {
 			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
 				%>
+			<hr size="1" width="100">
 			<div onclick="openInfoForm(<%=relist[i]%>);">
-			<hr size="1" width="100"> 
+		 
 				<% if (recipeInfo[4] == null) { 
 					if (userID != null && userMode.equals("1")) { %>
 						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
@@ -283,8 +284,8 @@
 						else { %>
 						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 						<% } } %>
-				<br><%= recipeInfo[0] %>
 			</div>
+			<br><%= recipeInfo[0] %>
 		<%
 			} %>
 		<hr size="1" width="100"> 

@@ -29,6 +29,11 @@ section {
 	font-family : Sans-Serif;
 	font-size : 10pt;
 }
+
+#sidebar div{
+	padding-left : 20px;
+}
+
 #recipeSection {
 	overflow-x: hidden;
 	width: 700px;

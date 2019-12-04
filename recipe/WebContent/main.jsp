@@ -171,8 +171,8 @@
 		<%	for (int i = relist.length-1; i >=0 ; i--) {
 			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
 				%>
-			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="100"> 
+			<div onclick="openInfoForm(<%=relist[i]%>);">
 					<% if (recipeInfo[4] == null) { 
 					if (userID != null && userMode.equals("1")) { %>
 						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
@@ -189,8 +189,9 @@
 						else { %>
 						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 						<% } } %>
-				<br><%= recipeInfo[0] %>
+				
 			</div>
+			<br><%= recipeInfo[0] %>
 		<%
 			} %>
 		<hr size="1" width="100"> 

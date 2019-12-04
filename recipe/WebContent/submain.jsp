@@ -142,11 +142,11 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
-							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100%; border-radius:10px;"></div>
+							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;border-radius:10px;">
 							</div> <% }
 						else { %>
-						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto; border-radius:10px;">
 						<% } } %>
 					</th>
 					<td style="padding-left:20px;">
@@ -196,8 +196,9 @@
 		<%	for (int i = relist.length-1; i >=0 ; i--) {
 			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
 				%>
+				<hr size="1" width="100"> 
 			<div onclick="openInfoForm(<%=relist[i]%>);">
-			<hr size="1" width="100"> 
+			
 					<% if (recipeInfo[4] == null) { 
 					if (userID != null && userMode.equals("1")) { %>
 						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
@@ -214,8 +215,9 @@
 						else { %>
 						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 						<% } } %>
-				<br><%= recipeInfo[0] %>
+				
 			</div>
+			<br><%= recipeInfo[0] %>
 		<%
 			} %>
 		<hr size="1" width="100"> 

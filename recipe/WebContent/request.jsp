@@ -41,7 +41,7 @@
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
-         <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
+         <li class="h"><a class="h" href="request.jsp"><font color ="rgb(255,197,19)">레시피요청</font></a></li>
          <div id="menubar">
                <ul class="h">
                   <li class="l">
