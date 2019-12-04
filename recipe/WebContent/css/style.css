@@ -1,6 +1,7 @@
 @charset "UTF-8";
 
 <style>
+
 #container {
 	width: 1000px;
 	margin: 0px auto;
@@ -9,6 +10,7 @@
 section {
 	width: 100%;
 	height: auto;
+	min-height: 800px;
 	margin: 0;
 	text-align: center;
 	background-color : rgb(255,227,177);
@@ -30,7 +32,7 @@ section {
 	font-size : 10pt;
 }
 
-#sidebar div{
+#sidebar div:not(.container-fulid){
 	padding-left : 20px;
 }
 

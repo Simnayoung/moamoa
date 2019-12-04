@@ -51,7 +51,7 @@
 
 		PrintWriter script = response.getWriter();
 		script.println("<script>");
-		script.println("alert('변경완료!\n레시피를 추가해주셔서 감사합니다!')");
+		script.println("alert('레시피를 추가해주셔서 감사합니다!')");
 		script.println("opener.parent.location.href = 'main.jsp'");
 		script.println("window.close()");
 		script.println("</script>");

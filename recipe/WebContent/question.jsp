@@ -32,7 +32,7 @@
 	  userID = (String) session.getAttribute("userID");
 	  userName = (String) session.getAttribute("userName");
 	  userProfile = (String) session.getAttribute("userProfile");
-	  userProfile = (String) session.getAttribute("userProfile");
+	  userMode = (String) session.getAttribute("diet");
 	  }
 	else if (userID == null)
 	{
@@ -58,7 +58,7 @@
 			<ul class="h">
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
-         <li class="h"><a class="h" href="question.jsp?choice=0"><font color ="rgb(255,197,19)">레시피Q&A</font></a></li>
+         <li class="h"><a class="h" href="question.jsp?choice=0"><font color ="#ffc513">레시피Q&A</font></a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
                <ul class="h">
@@ -73,7 +73,11 @@
 			</ul>
 		</div>
 	</div>
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
 	<section>
+	<%} %>
 	<br>
 		<div id = "ques">
 			<h3>질문 남기기</h3>
@@ -84,7 +88,11 @@
 				</form>
 		</div>
 		<div id = "queslis">
-		<a href="question.jsp?choice=0">[전체 보기]</a>&nbsp;|&nbsp;<a href="question.jsp?choice=1">[내가 쓴 질문]</a>
+		<a href="question.jsp?choice=0">
+		<%if(choice.equals("0")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>전체 보기</b></font></a>&nbsp;|&nbsp;<a href="question.jsp?choice=1">
+		<%if(choice.equals("1")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>내가 쓴 질문</b></font></a>
 			<% if (choice.equals("0")) { %> 
 				<% for(int i = questList.length-1; i>=0 ; i--) {%>
 				<hr size="1" width="700"> 
@@ -126,9 +134,10 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
-			if (len > 4) {
+			if (len >= 4) {
 				relist = new String[3];
 				for (Cookie c : ck) {
 					if (check >= len-4 && check < len-1)
@@ -137,9 +146,9 @@
 				}
 			}
 			else {
-				relist = new String[len-1];
+				relist = new String[len];
 				for (Cookie c : ck) {
-					if (check >= len-1)
+					if (check >= len)
 						break;
 					relist[check] = c.getValue();
 					check++;
@@ -163,7 +172,7 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:60px; "></div>
 							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 							</div> <% }
 						else { %>
@@ -177,7 +186,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

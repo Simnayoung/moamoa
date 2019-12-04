@@ -140,13 +140,14 @@
 			</ul>
 		</div>
 	</div>
-		<section><br>
-	<div id = "reque">
- 		<h3>(´▽`)<br>레시피의 사진도 등록해주세요!</h3>
-		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
-		<br><br>
-		<a href="#" onclick="openFile(); return false;">레시피 사진 변경</a>
-		</div></section>
+		 <section>
+   <div id = "reque">
+       <h3>(´▽`)<br>레시피의 사진도 등록해주세요!</h3>
+      <img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>
+      <br><br>
+      <a href="#" onclick="openFile(); return false;">레시피 사진 변경</a><br><br>
+      <a href="main.jsp">안 하고 넘어가기</a><br><br>
+      </div></section>
  <% } %>
 </body>
 </html>

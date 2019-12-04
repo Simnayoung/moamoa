@@ -17,7 +17,7 @@ public class UserDAO
 	{
 		try
 		{
-			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe";
+			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe?useUnicode=true&characterEncoding=UTF-8";
 			String dbID = "hyoj";
 			String dbPassword="1234";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -54,43 +54,44 @@ public class UserDAO
 		return -2; //데이터베이스 오류
 	}
 	
-	public int join(User user)
-	{
-		String SQL = "SELECT name FROM user";
-		
-		try {
-			pstmt = conn.prepareStatement(SQL);
-			rs = pstmt.executeQuery();
-			if(rs.next())
-			{
-				if (rs.getString(1).equals(user.getUserName())) 
-					return 0;
-				else
-				{
-					SQL = "INSERT INTO USER VALUES (?,?,?)";
-					try
-					{
-						pstmt = conn.prepareStatement(SQL);
-						pstmt.setString(1, user.getUserID());
-						pstmt.setString(2, user.getUserPassword());
-						pstmt.setString(3, user.getUserName());
-						pstmt.executeUpdate();
-						return 1;
-					}
-					catch(Exception e)
-					{
-						e.printStackTrace();
-					}
-					return -1;
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		return -2;
-	}
+	   public int join(User user)
+	   {
+	      String SQL = "SELECT id, name FROM user";
+	      
+	      try {
+	         pstmt = conn.prepareStatement(SQL);
+	         rs = pstmt.executeQuery();
+	         if(rs.next())
+	         {
+	            if (rs.getString(1).equals(user.getUserID())) 
+	               return 0;
+	            if (rs.getString(2).equals(user.getUserName()))
+	               return -1;
+	         }
+	         
+	         SQL = "INSERT INTO user (id,pw,name) VALUES (?,?,?)";
+	         try
+	         {
+	            pstmt = conn.prepareStatement(SQL);
+	            pstmt.setString(1, user.getUserID());
+	            pstmt.setString(2, user.getUserPassword());
+	            pstmt.setString(3, user.getUserName());
+	            pstmt.executeUpdate();
+	            return 1;
+	         }
+	         catch(Exception e)
+	         {
+	            e.printStackTrace();
+	            return -3;
+	         }
+	      }
+	      catch(Exception e)
+	      {
+	         e.printStackTrace();
+	         return -2;
+	      }
+	   }
+
 	
 	public String[] personal (String userID)
 	{

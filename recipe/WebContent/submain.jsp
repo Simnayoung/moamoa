@@ -21,8 +21,9 @@
 	session.setAttribute("category", category);
 	
 	String[] searchList = {category};
+   	String pageNum = request.getParameter("pageNum");
 	RecipeDAO recipeDAO = new RecipeDAO();
-	String[][] recipeList = recipeDAO.listing(searchList);
+	String[][] recipeList = recipeDAO.listing(searchList, pageNum);
 	
     String userID = null;
     String userName = null;
@@ -172,9 +173,10 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
-			if (len > 4) {
+			if (len >= 4) {
 				relist = new String[3];
 				for (Cookie c : ck) {
 					if (check >= len-4 && check < len-1)
@@ -183,9 +185,9 @@
 				}
 			}
 			else {
-				relist = new String[len-1];
+				relist = new String[len];
 				for (Cookie c : ck) {
-					if (check >= len-1)
+					if (check >= len)
 						break;
 					relist[check] = c.getValue();
 					check++;
@@ -223,7 +225,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

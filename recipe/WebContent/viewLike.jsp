@@ -49,7 +49,7 @@
 		</div>
 			<ul class="h">
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
-         <li class="h"><a class="h" href="viewLike.jsp?choice=0"><font color ="rgb(255,197,19)">발도장</font></a></li>
+         <li class="h"><a class="h" href="viewLike.jsp?choice=0"><font color ="#ffc513">발도장</font></a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
@@ -71,7 +71,13 @@
 	<section>
 	<%} %>
 		<br><div id = "recipeSection">
-		<a href="viewLike.jsp?choice=0">[전체 보기]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=1">[발도장찍은 레시피]</a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=2">[후기 남긴 레시피]</a>
+		<a href="viewLike.jsp?choice=0">
+		<%if(choice.equals("0")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>전체 보기</b></font></a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=1">
+		<%if(choice.equals("1")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>발도장찍은 레시피</b></font></a>&nbsp;|&nbsp;<a href="viewLike.jsp?choice=2">
+		<%if(choice.equals("2")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>후기 남긴 레시피</b></font></a>
 			<% if (choice.equals("0")) { 
 				String[] checkR = null;
 				if (searchList !=null) { 
@@ -137,7 +143,7 @@
 							else {
 								if (userID != null && userMode.equals("1")) { %>
 									<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
-									<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+									<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:60px; "></div>
 									<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
 									</div> <% }
 								else { %>
@@ -241,9 +247,10 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
-			if (len > 4) {
+			if (len >= 4) {
 				relist = new String[3];
 				for (Cookie c : ck) {
 					if (check >= len-4 && check < len-1)
@@ -252,9 +259,9 @@
 				}
 			}
 			else {
-				relist = new String[len-1];
+				relist = new String[len];
 				for (Cookie c : ck) {
-					if (check >= len-1)
+					if (check >= len)
 						break;
 					relist[check] = c.getValue();
 					check++;
@@ -291,7 +298,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

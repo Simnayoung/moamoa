@@ -18,8 +18,11 @@
 <body>
    <%
 	String[] searchList = null;
+  	String pageNum = request.getParameter("pageNum");
+  	if (pageNum == null)
+  		pageNum = "0";
 	RecipeDAO recipeDAO = new RecipeDAO();
-	String[][] recipeList = recipeDAO.listing(searchList);
+	String[][] recipeList = recipeDAO.listing(searchList, pageNum);
 	
     String userID = null;
     String userName = null;
@@ -136,6 +139,12 @@
 				</div>
 			<% } %>
 			<hr size="1" width="700"> 
+			<%if (!pageNum.equals("0")) { %>
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)-1%>">이전</a>&nbsp;|&nbsp;
+			<% } %>
+			<%if (recipeDAO.nextPage(pageNum)) { %>
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)+1%>">다음</a>
+			<% } %>
 		</div></section>
 		<%
 		Cookie[] ck = request.getCookies();
@@ -147,9 +156,10 @@
 					continue;
 				len++;
 			}
+			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
-			if (len > 4) {
+			if (len >= 4) {
 				relist = new String[3];
 				for (Cookie c : ck) {
 					if (check >= len-4 && check < len-1)
@@ -158,9 +168,9 @@
 				}
 			}
 			else {
-				relist = new String[len-1];
+				relist = new String[len];
 				for (Cookie c : ck) {
-					if (check >= len-1)
+					if (check >= len)
 						break;
 					relist[check] = c.getValue();
 					check++;
@@ -183,7 +193,7 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:60px;"></div>
 							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 							</div> <% }
 						else { %>
@@ -197,7 +207,7 @@
 		<hr size="1" width="100"> 
 		</div>
 		<%
-		}
+		} }
 		%>
 	<div id="footer">
 	컴퓨터공학과 심나영/장효정/조민지

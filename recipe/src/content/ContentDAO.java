@@ -18,7 +18,7 @@ public class ContentDAO {
 	{
 		try
 		{
-			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe";
+			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe?useUnicode=true&characterEncoding=UTF-8";
 			String dbID = "hyoj";
 			String dbPassword="1234";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -222,43 +222,43 @@ public class ContentDAO {
 		return 0; //데이터베이스 오류
 	}
 	
-	public int modifyQuest (String userID, String number, String title, String content)
-	{
-		if (title != null) {
-			String SQL = "UPDATE question SET title = ? WHERE id = ? and number = ?";
-			try
-			{
-				pstmt = conn.prepareStatement(SQL);
-				pstmt.setString(1, title);
-				pstmt.setString(2, userID);
-				pstmt.setString(3, number);
-				pstmt.executeUpdate();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-				return 0;
-			}
-		}
-		
-		if (content != null ) {
-			String SQL = "UPDATE question SET content = ? WHERE id = ? and number = ?";
-			try {
-				pstmt = conn.prepareStatement(SQL);
-				pstmt.setString(1, content);
-				pstmt.setString(2, userID);
-				pstmt.setString(3, number);
-				pstmt.executeUpdate();
-			}
-			catch(Exception e)
-			{
-				e.printStackTrace();
-				return 0;
-			}
-		}
-		
-		return 1;
-	}
+	   public int modifyQuest (String userID, String number, String title, String content)
+	   {
+	      if (title != null && title.length() != 0) {
+	         String SQL = "UPDATE question SET title = ? WHERE id = ? and number = ?";
+	         try
+	         {
+	            pstmt = conn.prepareStatement(SQL);
+	            pstmt.setString(1, title);
+	            pstmt.setString(2, userID);
+	            pstmt.setString(3, number);
+	            pstmt.executeUpdate();
+	         }
+	         catch(Exception e)
+	         {
+	            e.printStackTrace();
+	            return 0;
+	         }
+	      }
+	      
+	      if (content != null && content.length() != 0) {
+	         String SQL = "UPDATE question SET content = ? WHERE id = ? and number = ?";
+	         try {
+	            pstmt = conn.prepareStatement(SQL);
+	            pstmt.setString(1, content);
+	            pstmt.setString(2, userID);
+	            pstmt.setString(3, number);
+	            pstmt.executeUpdate();
+	         }
+	         catch(Exception e)
+	         {
+	            e.printStackTrace();
+	            return 0;
+	         }
+	      }
+	      
+	      return 1;
+	   }
 	
 	public int delQuest (String userID, String number)
 	{

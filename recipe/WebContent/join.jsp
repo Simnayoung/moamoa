@@ -36,7 +36,7 @@
 	<section id = "logins">
 	<br>
 	<div id = "rena">
-		<form method="post" action="joinAction.jsp" enctype="multipart/form-data">
+		<form method="post" action="joinAction.jsp">
 		
 			<h3>회원가입</h3>
 			<input type="text" placeholder="아이디" name="userID" maxlength="20" style = "width: 150px;"><br>				
