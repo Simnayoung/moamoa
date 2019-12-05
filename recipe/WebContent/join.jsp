@@ -13,7 +13,7 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
 			<div id="menubar">
@@ -36,7 +36,7 @@
 	<section id = "logins">
 	<br>
 	<div id = "rena">
-		<form method="post" action="joinAction.jsp" enctype="multipart/form-data">
+		<form method="post" action="joinAction.jsp">
 		
 			<h3>회원가입</h3>
 			<input type="text" placeholder="아이디" name="userID" maxlength="20" style = "width: 150px;"><br>				

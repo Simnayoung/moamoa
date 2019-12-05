@@ -18,7 +18,7 @@ public class RecipeDAO
 	{
 		try
 		{
-			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe";
+			String dbURL = "jdbc:mysql://ec2-18-224-2-255.us-east-2.compute.amazonaws.com/Recipe?useUnicode=true&characterEncoding=UTF-8";
 			String dbID = "hyoj";
 			String dbPassword="1234";
 			Class.forName("com.mysql.jdbc.Driver");
@@ -50,13 +50,18 @@ public class RecipeDAO
 		return 0;
 	}
 	
-	public String[][] listing(String[] searchList, String pageNumber)
+	public String[][] listing(String[] searchList, String pageNumber, String row)
 	{
 		String SQL = "SELECT number, name, cookware FROM recipe";
 		try
 		{
 			if (searchList == null) {
-				SQL += " ORDER BY number ASC LIMIT ?, 10";
+				if (row.equals("1")) {
+					SQL += " ORDER BY number DESC LIMIT ?, 10";
+				}
+				else {
+					SQL += " ORDER BY number ASC LIMIT ?, 10";
+				}
 				pstmt = conn.prepareStatement(SQL);
 				pstmt.setInt(1, Integer.parseInt(pageNumber)*10);
 				rs = pstmt.executeQuery();
@@ -99,9 +104,14 @@ public class RecipeDAO
 					else 
 						SQL += searchList[i] + " = 1 AND ";
 				}
-				SQL += " ORDER BY number ASC LIMIT ?, 10";
+				
+				if (row.equals("1")) {
+					SQL += " ORDER BY number DESC";
+				}
+				else {
+					SQL += " ORDER BY number ASC";
+				}
 				pstmt = conn.prepareStatement(SQL);
-				pstmt.setInt(1, Integer.parseInt(pageNumber)*10);
 				rs = pstmt.executeQuery();
 				
 				rs.last();
@@ -249,136 +259,140 @@ public class RecipeDAO
 		return 0;
 	}
 	
-	public int recipeInsert(String name, String content, String cate, String[] ingredients, String[] tools, String material, String cookware)
-	{
-		String SQL = "SELECT * FROM recipe WHERE name = ?";
-		
-		try
-		{
-			pstmt = conn.prepareStatement(SQL);
-			pstmt.setString(1,name);
-			rs = pstmt.executeQuery();
-			
-			rs.last();
-			int rowCount = rs.getRow();
-			
-			if (rowCount != 0)
-				return 0;
-			else {
-				PreparedStatement stmt2;
-				ResultSet rs2;
-				
-				String SQL2 = "SELECT recipe.number, recipe_info.number FROM recipe, recipe_info WHERE";
-				
-				if (ingredients != null) {
-					for (int i = 0; i<ingredients.length ; i++) {
-						if (i == 0)
-							SQL2 += " recipe."+ingredients[i]+" = 1";
-						else
-							SQL2 += " AND recipe."+ingredients[i]+" = 1";
-						}
-					}
-				if (tools != null) {
-					for (int i = 0; i<tools.length;i++) {
-						if (ingredients == null && i == 0)
-							SQL2 += " recipe."+tools[i]+" = 1";
-						else
-							SQL2 += " AND recipe."+tools[i]+" = 1";
-						}
-					}
-				if (ingredients == null && tools == null)
-					SQL2 += " recipe."+cate+" = 1";
-				else
-					SQL2 += " AND recipe."+cate+" = 1";
-				SQL2 += " AND recipe_info.content = ?";
+	   public int recipeInsert(String name, String content, String cate, String[] ingredients, String[] tools, String material, String cookware)
+	   {
+	      String SQL = "SELECT * FROM recipe WHERE name = ?";
+	      
+	      try
+	      {
+	         pstmt = conn.prepareStatement(SQL);
+	         pstmt.setString(1,name);
+	         rs = pstmt.executeQuery();
+	         
+	         rs.last();
+	         int rowCount = rs.getRow();
+	         
+	         if (rowCount != 0)
+	            return 0;
+	         else {
+	            PreparedStatement stmt2;
+	            ResultSet rs2;
+	            
+	            String SQL2 = "SELECT recipe.number, recipe_info.number FROM recipe, recipe_info WHERE";
+	            
+	            if (ingredients != null && ingredients.length != 0) {
+	               for (int i = 0; i<ingredients.length ; i++) {
+	                  if (i == 0)
+	                     SQL2 += " recipe."+ingredients[i]+" = 1";
+	                  else
+	                     SQL2 += " AND recipe."+ingredients[i]+" = 1";
+	                  }
+	               }
+	            if (tools != null && tools.length != 0) {
+	               for (int i = 0; i<tools.length;i++) {
+	                  if (ingredients == null && i == 0)
+	                     SQL2 += " recipe."+tools[i]+" = 1";
+	                  else
+	                     SQL2 += " AND recipe."+tools[i]+" = 1";
+	                  }
+	               }
+	            if (ingredients == null && tools == null)
+	               SQL2 += " recipe."+cate+" = 1";
+	            else
+	               SQL2 += " AND recipe."+cate+" = 1";
+	            SQL2 += " AND recipe_info.content = ?";
 
-				stmt2 = conn.prepareStatement(SQL2);
-				stmt2.setString(1, content);
+	            stmt2 = conn.prepareStatement(SQL2);
+	            stmt2.setString(1, content);
 
-				rs2 = stmt2.executeQuery();
-				
-				rs2.last();
-				int rowCount2 = rs2.getRow();
-				
-				if (rowCount2 != 0)
-					return 0;
-				else {
-					String SQL6 = "SELECT content FROM recipe_info";
-					stmt = conn.createStatement();
-					rs = stmt.executeQuery(SQL6);
-					int plug = 1;
-					
-					while(rs.next()) {
-						String contentCheck = rs.getString(1);
-						int percent = 0;
-						for (int k = 0; k<contentCheck.length();k++) {
-							if (k>content.length()-1)
-								break;
-							if (content.charAt(k) == contentCheck.charAt(k))
-								percent++;
-						}
-						if ((percent/content.length())*100 > 80) {
-							plug = 0;
-							break;
-						}
-					}
-					
-					if (plug == 1) {
-						String SQL3 = "INSERT INTO recipe (name, cookware";
-						
-						if (ingredients != null) {
-							for (int i = 0; i<ingredients.length ; i++) {
-								SQL3 += ", "+ingredients[i];
-							}
-						}
-						if (tools != null) {
-							for (int i = 0; i<tools.length;i++) {
-								SQL3 += ", "+tools[i];
-							}
-						}
-						SQL3 += ", "+cate+") VALUES (?, ?";
-						if (ingredients != null && tools != null) {
-							for (int i = 0; i<(ingredients.length+tools.length) ; i++) {
-								SQL3 += ", 1";
-							}
-						}
-						SQL3 += ", 1)";
-	
-						
-						PreparedStatement pres = conn.prepareStatement(SQL3);
-						pres.setString(1, name);
-						pres.setString(2, cookware);
-						pres.executeUpdate();
-						
-						String SQL4 = "SELECT number FROM recipe ORDER BY number DESC LIMIT 1";
-						stmt = conn.createStatement();
-						rs = stmt.executeQuery(SQL4);
-						int recipeNumber = 0;
-						while(rs.next())
-							recipeNumber = rs.getInt(1);
-						
-						String SQL5 = "INSERT INTO recipe_info (number, content, material) VALUES (?, ? ,?)";
-						pres = conn.prepareStatement(SQL5);
-						pres.setInt(1, recipeNumber);
-						pres.setString(2, content);
-						pres.setString(3, material);
-	
-						pres.executeUpdate();
-						
-						return recipeNumber;
-					}
-					else
-						return 0;
-				}
-			}
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-		
-		return -1;
-	}
+	            rs2 = stmt2.executeQuery();
+	            
+	            rs2.last();
+	            int rowCount2 = rs2.getRow();
+	            
+	            if (rowCount2 != 0)
+	               return 0;
+	            else {
+	               String SQL6 = "SELECT content FROM recipe_info";
+	               stmt = conn.createStatement();
+	               rs = stmt.executeQuery(SQL6);
+	               int plug = 1;
+	               
+	               while(rs.next()) {
+	                  String contentCheck = rs.getString(1);
+	                  int percent = 0;
+	                  for (int k = 0; k<contentCheck.length();k++) {
+	                     if (k>content.length()-1)
+	                        break;
+	                     if (content.charAt(k) == contentCheck.charAt(k))
+	                        percent++;
+	                  }
+	                  if ((percent/content.length())*100 > 80) {
+	                     plug = 0;
+	                     break;
+	                  }
+	               }
+	               
+	               if (plug == 1) {
+	                  String SQL3 = "INSERT INTO recipe (name, cookware";
+	                  
+	                  if (ingredients != null && ingredients.length != 0) {
+	                     for (int i = 0; i<ingredients.length ; i++) {
+	                        SQL3 += ", "+ingredients[i];
+	                     }
+	                  }
+	                  if (tools != null && tools.length != 0) {
+	                     for (int i = 0; i<tools.length;i++) {
+	                        SQL3 += ", "+tools[i];
+	                     }
+	                  }
+	                  SQL3 += ", "+cate+") VALUES (?, ?";
+	                  if (ingredients != null && ingredients.length != 0) {
+	                     for (int i = 0; i<ingredients.length ; i++) {
+	                        SQL3 += ", 1";
+	                     }
+	                  }
+	                  if (tools != null && tools.length != 0) {
+	                     for (int i = 0; i<tools.length;i++) {
+	                        SQL3 += ", 1";
+	                     }
+	                  }
+	                  SQL3 += ", 1)";
+	   
+	                  
+	                  PreparedStatement pres = conn.prepareStatement(SQL3);
+	                  pres.setString(1, name);
+	                  pres.setString(2, cookware);
+	                  pres.executeUpdate();
+	                  
+	                  String SQL4 = "SELECT number FROM recipe ORDER BY number DESC LIMIT 1";
+	                  stmt = conn.createStatement();
+	                  rs = stmt.executeQuery(SQL4);
+	                  int recipeNumber = 0;
+	                  while(rs.next())
+	                     recipeNumber = rs.getInt(1);
+	                  String SQL5 = "INSERT INTO recipe_info (number, content, material) VALUES (?, ? ,?)";
+	                  pres = conn.prepareStatement(SQL5);
+	                  pres.setInt(1, recipeNumber);
+	                  pres.setString(2, content);
+	                  pres.setString(3, material);
+	   
+	                  pres.executeUpdate();
+	                  
+	                  return recipeNumber;
+	               }
+	               else
+	                  return 0;
+	            }
+	         }
+	      }
+	      catch(Exception e)
+	      {
+	         e.printStackTrace();
+	      }
+	      
+	      return -1;
+	   }
 	
 	public int profile (String newNum, String profile)
 	{
@@ -470,19 +484,23 @@ public class RecipeDAO
 				pstmt.setString(1,userID);
 				rs = pstmt.executeQuery();
 				
-				rs.last();
-				int rowCount = rs.getRow();
-				rs.beforeFirst();
-				int count = 0;
-				
-				String[] reviewList = new String[rowCount];
-				
-				while (rs.next()) {
-					reviewList[count] = rs.getString(1);
-					count++;
-				}
+				if (rs.next()) {
+					rs.last();
+					int rowCount = rs.getRow();
+					rs.beforeFirst();
+					int count = 0;
 					
-				return reviewList;
+					String[] reviewList = new String[rowCount];
+					
+					while (rs.next()) {
+						reviewList[count] = rs.getString(1);
+						count++;
+					}
+						
+					return reviewList;
+				}
+				else
+					return null;
 			}
 			catch(Exception e)
 			{
@@ -594,9 +612,12 @@ public class RecipeDAO
 			String SQL = "SELECT number FROM recipe ORDER BY number ASC LIMIT ?, 1";
 				pstmt = conn.prepareStatement(SQL);
 				pstmt.setInt(1, (Integer.parseInt(pageNumber)+1)*10);
-				pstmt.executeQuery();
+				rs = pstmt.executeQuery();
 				
-				return true;
+				if (rs.next())
+					return true;
+				else
+					return false;
 			}
 			catch(Exception e)
 			{

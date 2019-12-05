@@ -48,7 +48,7 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
@@ -75,9 +75,9 @@
 		<a href="#" onclick="openFile(); return false;">프로필 사진 변경</a>	
 		<div id = "pass">
 		<form method="post" action="personalAction.jsp">
-			닉네임 : <input type="text" placeholder="<%= personal[1] %>" name="userName" maxlength="20"><br>	
-			비밀번호 : <input type="password" placeholder="<%= personal[0] %>" name="userPassword" maxlength="20"><br>			
-			다이어트 모드 : <%if (personal[3].equals("0")) {%>
+			&nbsp;닉네임 &ensp;<input type="text" placeholder="<%= personal[1] %>" name="userName" maxlength="20" style="width:150px;"><br>	
+			비밀번호 <input type="password" placeholder="<%= personal[0] %>" name="userPassword" maxlength="20" style="width:150px;"><br>			
+			<br>다이어트 모드  <%if (personal[3].equals("0")) {%>
 			<input type="radio" name="diet" value="off" checked="checked">OFF&nbsp;&nbsp;
 			<input type="radio" name="diet" value="on">ON
 			<% }
@@ -85,7 +85,7 @@
 			<input type="radio" name="diet" value="off">OFF&nbsp;
 			<input type="radio" name="diet" value="on" checked="checked">ON
 			<% } %>
-			<br><input type="submit" value="정보수정">
+			<br><br><input type="submit" value="정보수정">
 		</form>
 		</div>
 	</section>

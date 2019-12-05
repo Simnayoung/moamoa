@@ -11,18 +11,21 @@
 <title>✿모아모아 레시피✿</title>
 <script type="text/javascript">
 	function openInfoForm(recipeNum) {
-		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank", "width=425, height=700, resizable=no, scrollbars=yes");
+		window.open("infoFormAction.jsp?recipeNum="+recipeNum,"_blank", "width=500, height=700, resizable=no, scrollbars=yes");
 	}
 </script>
 </head>
 <body>
    <%
 	String[] searchList = null;
-   	String pageNum = request.getParameter("pageNum");
-   	if (pageNum == null)
-   		pageNum = "0";
+  	String pageNum = request.getParameter("pageNum");
+  	if (pageNum == null)
+  		pageNum = "0";
+  	String row = request.getParameter("row");
+  	if (row == null)
+  		row = "0";
 	RecipeDAO recipeDAO = new RecipeDAO();
-	String[][] recipeList = recipeDAO.listing(searchList, pageNum);
+	String[][] recipeList = recipeDAO.listing(searchList, pageNum, row);
 	
     String userID = null;
     String userName = null;
@@ -41,7 +44,7 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp?pageNum=0"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
  		<%
@@ -88,21 +91,31 @@
 			</ul>
 		</div>
 	</div>
-	<section><br>
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
+	<section>
+	<%} %>
+	<br>
 		<div id="category">
 			<ul class="c">
-				<li class="c"><a href="submain.jsp?category=korean&pageNum=0"><img src="/recipe/cateImg/korean.jpg"><br>한식</a></li>
-				<li class="c"><a href="submain.jsp?category=chinese&pageNum=0"><img src="/recipe/cateImg/chinese.jpg"><br>중식</a></li>
-				<li class="c"><a href="submain.jsp?category=japenese&pageNum=0"><img src="/recipe/cateImg/japanese.jpg"><br>일식</a></li>
-				<li class="c"><a href="submain.jsp?category=western&pageNum=0"><img src="/recipe/cateImg/western.jpg"><br>양식</a></li>
-				<li class="c"><a href="submain.jsp?category=school&pageNum=0"><img src="/recipe/cateImg/tt.jpg"><br>분식</a></li>
-				<li class="c"><a href="submain.jsp?category=fast&pageNum=0"><img src="/recipe/cateImg/fast.jpg"><br>패스트푸드</a></li>
-				<li class="c"><a href="submain.jsp?category=dessert&pageNum=0"><img src="/recipe/cateImg/dessert.jpg"><br>디저트</a></li>
-				<li class="c"><a href="submain.jsp?category=easy&pageNum=0"><img src="/recipe/cateImg/simple.jpg"><br>간편식</a></li>
-				<li class="c"><a href="submain.jsp?category=other&pageNum=0"><img src="/recipe/cateImg/etc.png"><br>기타</a></li>
+				<li class="c"><a href="submain.jsp?category=korean"><img src="/recipe/cateImg/korean.jpg"><br>한식</a></li>
+				<li class="c"><a href="submain.jsp?category=chinese"><img src="/recipe/cateImg/chinese.jpg"><br>중식</a></li>
+				<li class="c"><a href="submain.jsp?category=japenese"><img src="/recipe/cateImg/japanese.jpg"><br>일식</a></li>
+				<li class="c"><a href="submain.jsp?category=western"><img src="/recipe/cateImg/western.jpg"><br>양식</a></li>
+				<li class="c"><a href="submain.jsp?category=school"><img src="/recipe/cateImg/tt.jpg"><br>분식</a></li>
+				<li class="c"><a href="submain.jsp?category=fast"><img src="/recipe/cateImg/fast.jpg"><br>패스트푸드</a></li>
+				<li class="c"><a href="submain.jsp?category=dessert"><img src="/recipe/cateImg/dessert.jpg"><br>디저트</a></li>
+				<li class="c"><a href="submain.jsp?category=easy"><img src="/recipe/cateImg/simple.jpg"><br>간편식</a></li>
+				<li class="c"><a href="submain.jsp?category=other"><img src="/recipe/cateImg/etc.png"><br>기타</a></li>
 			</ul>
 		</div>
 		<div id="recipeSection">
+		<a href="main.jsp?row=0&pageNum=<%=pageNum%>">
+		<%if(row.equals("0")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>오래된순</b></font></a>&nbsp;|&nbsp;<a href="main.jsp?row=1&pageNum=<%=pageNum%>">
+		<%if(row.equals("1")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>최신순</b></font></a>
 			<% for(int i = 0; i<recipeList.length ; i++) {%>
 				<hr size="1" width="700"> 
 				<div id="recipeContent" onclick="openInfoForm(<%=recipeList[i][0]%>);">
@@ -118,11 +131,11 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 100px; max-heigt:100px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
-							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100%; border-radius:10px;"></div>
+							<img src="<%=recipeList[i][5]%>" style="position:relative; z-index:1; display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto; border-radius:10px;">
 							</div> <% }
 						else { %>
-						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto;">
+						<img src="<%=recipeList[i][5]%>" style="display: block; max-width: 100px; max-heigt:100px; width: auto; height: auto; border-radius:10px;">
 						<% } } %>
 					</th>
 					<td style="padding-left:20px;">
@@ -135,10 +148,10 @@
 			<% } %>
 			<hr size="1" width="700"> 
 			<%if (!pageNum.equals("0")) { %>
-		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)-1%>">이전</a>&nbsp;|&nbsp;
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)-1%>&row=<%=row%>">이전</a>&nbsp;|&nbsp;
 			<% } %>
 			<%if (recipeDAO.nextPage(pageNum)) { %>
-		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)+1%>">다음</a>
+		    	 <a href="main.jsp?pageNum=<%=Integer.parseInt(pageNum)+1%>&row=<%=row%>">다음</a>
 			<% } %>
 		</div></section>
 		<%
@@ -154,7 +167,7 @@
 			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
-			if (len > 4) {
+			if (len >= 4) {
 				relist = new String[3];
 				for (Cookie c : ck) {
 					if (check >= len-4 && check < len-1)
@@ -163,9 +176,9 @@
 				}
 			}
 			else {
-				relist = new String[len-1];
+				relist = new String[len];
 				for (Cookie c : ck) {
-					if (check >= len-1)
+					if (check >= len)
 						break;
 					relist[check] = c.getValue();
 					check++;
@@ -176,8 +189,8 @@
 		<%	for (int i = relist.length-1; i >=0 ; i--) {
 			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
 				%>
-			<div onclick="openInfoForm(<%=relist[i]%>);">
 			<hr size="1" width="100"> 
+			<div onclick="openInfoForm(<%=relist[i]%>);">
 					<% if (recipeInfo[4] == null) { 
 					if (userID != null && userMode.equals("1")) { %>
 						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
@@ -188,14 +201,15 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:60px;"></div>
 							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 							</div> <% }
 						else { %>
 						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 						<% } } %>
-				<br><%= recipeInfo[0] %>
+				
 			</div>
+			<br><%= recipeInfo[0] %>
 		<%
 			} %>
 		<hr size="1" width="100"> 

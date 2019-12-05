@@ -16,10 +16,12 @@
 	String userID = null;
 	String userName = null;
 	String userProfile = null;
+	String userMode = null;
 	if(session.getAttribute("userID") != null){
 	  userID = (String) session.getAttribute("userID");
 	  userName = (String) session.getAttribute("userName");
 	  userProfile = (String) session.getAttribute("userProfile");
+	  userMode = (String) session.getAttribute("diet");
 	  }
 	else if (userID == null)
 	{
@@ -33,13 +35,13 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
          <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
-         <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
+         <li class="h"><a class="h" href="request.jsp"><font color ="#ffc513">레시피요청</font></a></li>
          <div id="menubar">
                <ul class="h">
                   <li class="l">
@@ -53,7 +55,12 @@
 			</ul>
 		</div>
 	</div>
-	<section><br>
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
+	<section>
+	<%} %>
+	<br>
 	<div id = "reque">
 		<h3>(❁´▽`❁)<br>여러분의 소중한 레시피를 공유해주세요!</h3>
 		<img src="/recipe/cateImg/food.png" style="width: 150px; height: 150px; object-fit: contain; overflow: hidden; border-radius: 70px; -moz-border-radius: 70px; -khtml-border-radius: 70px; -webkit-border-radius: 70px;"/>

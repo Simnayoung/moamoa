@@ -40,9 +40,8 @@
 			PrintWriter script = response.getWriter();
 			script.println("<script>");
 			script.println("alert('수정이 완료되었습니다!')");
-			script.println("</script>");
-			
-			response.sendRedirect("rename.jsp");
+			script.println("location.href='rename.jsp'");
+	        script.println("</script>");
 		}
 		else if(result == 0)
 		{

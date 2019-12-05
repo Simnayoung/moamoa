@@ -32,7 +32,7 @@
 	  userID = (String) session.getAttribute("userID");
 	  userName = (String) session.getAttribute("userName");
 	  userProfile = (String) session.getAttribute("userProfile");
-	  userProfile = (String) session.getAttribute("userProfile");
+	  userMode = (String) session.getAttribute("diet");
 	  }
 	else if (userID == null)
 	{
@@ -53,12 +53,12 @@
 	<div id="container">
 		<div id="navi">
 		<div id = "title">
-				<a class="h active" href="main.jsp"><img src="/cateImg/title.png" width = "120px"></a>
+				<a class="h active" href="main.jsp"><img src="/recipe/cateImg/title.png" width = "120px"></a>
 		</div>
 			<ul class="h">
 		<li class="h"><font color = "white">타이틀자리타이틀자</font></li>
          <li class="h"><a class="h" href="viewLike.jsp?choice=0">발도장</a></li>
-         <li class="h"><a class="h" href="question.jsp?choice=0">레시피Q&A</a></li>
+         <li class="h"><a class="h" href="question.jsp?choice=0"><font color ="#ffc513">레시피Q&A</font></a></li>
          <li class="h"><a class="h" href="request.jsp">레시피요청</a></li>
          <div id="menubar">
                <ul class="h">
@@ -73,7 +73,12 @@
 			</ul>
 		</div>
 	</div>
-		<section><br>
+	<%if (userID != null && userMode.equals("1")) { %>
+	<section style = "background-color:rgb(141,169,241);">
+	<% }else { %>
+	<section>
+	<%} %>
+	<br>
 		<div id = "ques">
 			<h3>질문 남기기</h3>
 				<form method="post" action="questAction.jsp?number=<%=questList.length+1%>">
@@ -83,7 +88,11 @@
 				</form>
 		</div>
 		<div id = "queslis">
-		<a href="question.jsp?choice=0">[전체 보기]</a>&nbsp;|&nbsp;<a href="question.jsp?choice=1">[내가 쓴 질문]</a>
+		<a href="question.jsp?choice=0">
+		<%if(choice.equals("0")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>전체 보기</b></font></a>&nbsp;|&nbsp;<a href="question.jsp?choice=1">
+		<%if(choice.equals("1")){ %><font><%}else  {%><font color ="#d3d3d3" ><%} %>
+		<b>내가 쓴 질문</b></font></a>
 			<% if (choice.equals("0")) { %> 
 				<% for(int i = questList.length-1; i>=0 ; i--) {%>
 				<hr size="1" width="700"> 
@@ -111,7 +120,11 @@
 					&nbsp;내용 : <% if (questList[i][1].length() < 50) { %><%=questList[i][1] %><br>
 					<% } else { %><%= questList[i][1].substring(0, 50)%> ...<br> <% } %>
 				</div>
-			<% } } %>
+			<% }
+			if (questList.length == 0) { %>
+				<h3>(^o^)<br>아직 질문을 남기지 않으셨어요!</h3>
+			<% }
+			} %>
 			<hr size="1" width="700"> </div>
 		</section>
 		<%
@@ -128,7 +141,7 @@
 			if (len != 0) {
 			String[] relist = null;
 			int check = 0;
-			if (len > 4) {
+			if (len >= 4) {
 				relist = new String[3];
 				for (Cookie c : ck) {
 					if (check >= len-4 && check < len-1)
@@ -137,9 +150,9 @@
 				}
 			}
 			else {
-				relist = new String[len-1];
+				relist = new String[len];
 				for (Cookie c : ck) {
-					if (check >= len-1)
+					if (check >= len)
 						break;
 					relist[check] = c.getValue();
 					check++;
@@ -150,8 +163,9 @@
 		<%	for (int i = relist.length-1; i >=0 ; i--) {
 			String[] recipeInfo = recipeDAO.recipeInfo(relist[i]);
 				%>
+				<hr size="1" width="80"> 
 			<div onclick="openInfoForm(<%=relist[i]%>);">
-			<hr size="1" width="80"> 
+			
 					<% if (recipeInfo[4] == null) { 
 					if (userID != null && userMode.equals("1")) { %>
 						<img src="/recipe/cateImg/dietfood.png" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
@@ -162,14 +176,15 @@
 					else {
 						if (userID != null && userMode.equals("1")) { %>
 							<div class="container-fulid" style="max-width: 80px; max-heigt:80px; width: auto; height: auto; position:relative">
-							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:100% "></div>
+							<div style="position:absolute; background-color:rgba(0, 255, 255, 0.5); z-index:10; height:100%; width:60px; "></div>
 							<img src="<%=recipeInfo[4]%>" style="position:relative; z-index:1; display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 							</div> <% }
 						else { %>
 						<img src="<%=recipeInfo[4]%>" style="display: block; max-width: 80px; max-heigt:80px; width: auto; height: auto;">
 						<% } } %>
-				<br><%= recipeInfo[0] %>
+				
 			</div>
+			<br><%= recipeInfo[0] %>
 		<%
 			} %>
 		<hr size="1" width="100"> 
