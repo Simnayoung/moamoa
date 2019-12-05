@@ -147,7 +147,7 @@ public class RecipeDAO
 		{
 			e.printStackTrace();
 		}
-		return null; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return null; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
 	
 	public String[] recipeInfo(String recipeNum)
@@ -232,7 +232,7 @@ public class RecipeDAO
 			if (plug == 2)
 				SQL = "DELETE FROM like_info WHERE number = ? AND id = ?";
 			else if (plug == 3)
-				SQL = "INSERT INTO like_info (number, id) VALUES ("+recipeNum+", "+UserID+")";
+				SQL = "INSERT INTO like_info (number, id) VALUES (?,?)";
 			
 			try
 			{
@@ -243,8 +243,10 @@ public class RecipeDAO
 					pstmt.executeUpdate();
 				}
 				else if (plug == 3) {
-					stmt = conn.createStatement();
-					stmt.executeUpdate(SQL); 
+					pstmt = conn.prepareStatement(SQL);
+					pstmt.setString(1,recipeNum);
+					pstmt.setString(2, UserID);
+					pstmt.executeUpdate(); 
 				}
 			
 				return 1;
@@ -446,7 +448,7 @@ public class RecipeDAO
 		{
 			e.printStackTrace();
 		}
-		return null; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return null; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
 	
 	public String[] reviewGGet(String userID, String recipeNum)
@@ -507,7 +509,7 @@ public class RecipeDAO
 				e.printStackTrace();
 			}
 		}
-		return null; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return null; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
 	
 	public int reviewInput(String userID, String content, String image, String recipeNum, String userName)
@@ -545,7 +547,7 @@ public class RecipeDAO
 		{
 			e.printStackTrace();
 		}
-		return 0; //µ¥ÀÌÅÍº£ÀÌ½º ¿À·ù
+		return 0; //ë°ì´í„°ë² ì´ìŠ¤ ì˜¤ë¥˜
 	}
 	
 	public int modifyReview (String userID, String number, String content, String image)
